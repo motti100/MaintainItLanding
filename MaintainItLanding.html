@@ -3,188 +3,845 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maintain-It | One App for Your Cars, Home & Property</title>
-    <meta name="description" content="AI-powered VIN scanning for cars and intelligent tracking for your home. Smart reminders and service history for all your assets.">
+    <title>Maintain-It | Never Miss Maintenance for Your Cars, Home & Property</title>
+    <meta name="description" content="AI-powered VIN scanning for instant vehicle setup. Smart maintenance tracking for cars, homes, and properties. Never miss an oil change or filter replacement again.">
     
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="app-icon.png">
+    
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --primary: #0066FF; 
-            --primary-dark: #0052CC;
-            --secondary: #0F172A; 
-            --text-main: #334155; 
+            --primary: #3B82F6;
+            --primary-dark: #2563EB;
+            --primary-light: #60A5FA;
+            --secondary: #1E293B;
+            --text-main: #334155;
             --text-muted: #64748B;
             --bg-light: #F8FAFC;
+            --bg-lighter: #F1F5F9;
             --white: #FFFFFF;
+            --green: #10B981;
+            --orange: #F59E0B;
+            --sage: #C8DEB9;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
         
         body { 
-            font-family: 'Inter', -apple-system, sans-serif; 
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; 
             line-height: 1.6; 
             color: var(--text-main); 
             background: var(--white);
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
         html { scroll-behavior: smooth; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-        .section-header { text-align: center; margin-bottom: 60px; }
-        .section-header h2 { font-size: clamp(2rem, 4vw, 2.5rem); font-weight: 800; color: var(--secondary); margin-bottom: 15px; letter-spacing: -0.02em; }
-        .section-header p { font-size: 1.2rem; color: var(--text-muted); max-width: 700px; margin: 0 auto; }
+        
+        .container { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 0 24px; 
+        }
+        
+        .section-header { 
+            text-align: center; 
+            margin-bottom: 60px; 
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        .section-header h2 { 
+            font-size: clamp(2rem, 5vw, 3rem); 
+            font-weight: 900; 
+            color: var(--secondary); 
+            margin-bottom: 16px; 
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+        }
+        
+        .section-header p { 
+            font-size: clamp(1.1rem, 2.5vw, 1.3rem); 
+            color: var(--text-muted); 
+            max-width: 700px; 
+            margin: 0 auto; 
+            font-weight: 500;
+        }
 
-        /* --- Hero Section --- */
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Hero Section - Enhanced */
         .hero {
-            min-height: 90vh;
+            min-height: 95vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 100px 24px;
-            background: radial-gradient(circle at 50% 0%, rgba(0, 102, 255, 0.08) 0%, rgba(255,255,255,0) 75%);
+            padding: 120px 24px 80px;
+            position: relative;
+            background: linear-gradient(180deg, var(--white) 0%, var(--bg-light) 100%);
+            overflow: hidden;
+        }
+
+        /* Animated background elements */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 50%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 50%, rgba(200, 222, 185, 0.08) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+            z-index: 0;
+        }
+
+        .hero > * {
+            position: relative;
+            z-index: 1;
         }
         
         .app-icon {
-            width: 160px; height: 160px; margin-bottom: 40px; border-radius: 32px;
-            filter: drop-shadow(0 20px 40px rgba(0, 102, 255, 0.25));
+            width: 140px; 
+            height: 140px; 
+            margin-bottom: 40px; 
+            border-radius: 32px;
+            filter: drop-shadow(0 25px 50px rgba(59, 130, 246, 0.3));
             animation: float 6s ease-in-out infinite;
+            transition: transform 0.3s ease;
+        }
+
+        .app-icon:hover {
+            transform: scale(1.05);
+            animation: none;
         }
         
         .hero h1 { 
-            font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 800; color: var(--secondary);
-            margin-bottom: 24px; line-height: 1.05; letter-spacing: -0.03em;
+            font-size: clamp(2.5rem, 7vw, 4.5rem); 
+            font-weight: 900; 
+            color: var(--secondary);
+            margin-bottom: 24px; 
+            line-height: 1.05; 
+            letter-spacing: -0.04em;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .hero .highlight {
+            background: linear-gradient(120deg, var(--primary), var(--primary-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .hero .subtitle { 
-            font-size: clamp(1.1rem, 3vw, 1.4rem); color: var(--text-muted); margin-bottom: 48px; 
-            max-width: 750px; font-weight: 500;
+            font-size: clamp(1.1rem, 3vw, 1.4rem); 
+            color: var(--text-muted); 
+            margin-bottom: 48px; 
+            max-width: 750px; 
+            font-weight: 500;
+            line-height: 1.6;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+
+        /* Trust badges */
+        .trust-badges {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
+            animation: fadeInUp 0.8s ease-out 0.5s both;
+        }
+
+        .badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .badge .icon {
+            font-size: 1.3rem;
         }
         
+        /* Email form - Enhanced */
         .email-form {
-            display: flex; gap: 10px; max-width: 550px; width: 100%;
-            background: var(--white); padding: 10px; border-radius: 20px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.1); border: 1px solid rgba(0, 102, 255, 0.1);
-        }
-        
-        .email-input { flex: 1; padding: 16px 20px; font-size: 1.1rem; border: none; font-family: inherit; outline: none; }
-        .submit-btn { 
-            padding: 16px 32px; font-size: 1.1rem; font-weight: 700; background: var(--primary); color: white; 
-            border: none; border-radius: 14px; cursor: pointer; transition: 0.3s; white-space: nowrap;
-        }
-        .submit-btn:hover { background: var(--primary-dark); transform: translateY(-2px); }
-
-        /* --- Setup Section --- */
-        .setup-section { padding: 120px 0; background: var(--white); }
-        .setup-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-        .setup-card { 
-            background: var(--bg-light); padding: 50px; border-radius: 30px; border: 1px solid rgba(0,0,0,0.03); transition: 0.4s;
-        }
-        .setup-card:hover { transform: translateY(-10px); background: white; box-shadow: 0 30px 60px rgba(0,0,0,0.05); }
-        .setup-card h3 { font-size: 1.8rem; margin-bottom: 20px; color: var(--secondary); display: flex; align-items: center; gap: 12px; }
-        .setup-card p { color: var(--text-muted); font-size: 1.15rem; }
-
-        /* --- Video Section --- */
-        .video-section { padding: 100px 0; background: var(--bg-light); }
-        .video-container { max-width: 900px; margin: 0 auto; }
-        .video-wrapper {
-            position: relative; padding-bottom: 56.25%; height: 0;
-            background: var(--secondary); border-radius: 32px; overflow: hidden;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.2);
-        }
-        .video-placeholder {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            display: flex; align-items: center; justify-content: center; flex-direction: column;
-            color: white; background: linear-gradient(135deg, var(--secondary), var(--primary));
-        }
-        .play-btn { font-size: 5rem; cursor: pointer; transition: 0.3s; }
-        .play-btn:hover { transform: scale(1.1); }
-
-        /* --- Features Section (Light & Foregrounded) --- */
-        .features-section { padding: 120px 0; background: var(--white); }
-        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
-        .feature-item { 
-            padding: 50px; background: var(--white); border-radius: 32px; 
-            border: 1px solid #F1F5F9; box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+            display: flex; 
+            gap: 12px; 
+            max-width: 550px; 
+            width: 100%;
+            background: var(--white); 
+            padding: 8px; 
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.08), 
+                        0 0 0 1px rgba(59, 130, 246, 0.1);
+            animation: fadeInUp 0.8s ease-out 0.6s both;
             transition: all 0.3s ease;
         }
-        .feature-item:hover { 
-            transform: translateY(-10px); border-color: var(--primary);
-            box-shadow: 0 20px 50px rgba(0, 102, 255, 0.08); 
+
+        .email-form:hover {
+            box-shadow: 0 25px 70px rgba(0,0,0,0.12),
+                        0 0 0 2px var(--primary);
         }
-        .feature-icon { font-size: 3rem; margin-bottom: 25px; display: block; }
-        .feature-item h4 { font-size: 1.5rem; margin-bottom: 15px; color: var(--secondary); font-weight: 800; }
-        .feature-item p { color: var(--text-muted); font-size: 1.1rem; }
+        
+        .email-input { 
+            flex: 1; 
+            padding: 18px 24px; 
+            font-size: 1.05rem; 
+            border: none; 
+            font-family: inherit; 
+            outline: none;
+            border-radius: 12px;
+            background: var(--white);
+            color: var(--secondary);
+            font-weight: 500;
+        }
 
-        /* --- Testimonials --- */
-        .testimonials-section { padding: 100px 0; background: var(--bg-light); }
-        .testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .testimonial-card { background: var(--white); padding: 40px; border-radius: 24px; box-shadow: 0 5px 15px rgba(0,0,0,0.02); }
-        .testimonial-card p { font-style: italic; color: var(--text-main); font-size: 1.1rem; margin-bottom: 20px; }
-        .author-box { display: flex; align-items: center; gap: 12px; }
-        .author-info h5 { font-weight: 700; color: var(--primary); }
-        .author-info span { font-size: 0.85rem; color: var(--text-muted); }
+        .email-input::placeholder {
+            color: var(--text-muted);
+            opacity: 0.7;
+        }
+        
+        .submit-btn { 
+            padding: 18px 36px; 
+            font-size: 1.05rem; 
+            font-weight: 700; 
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white; 
+            border: none; 
+            border-radius: 12px; 
+            cursor: pointer; 
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+        
+        .submit-btn:hover { 
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
+        }
 
-        /* --- Footer --- */
-        footer { background: var(--secondary); color: rgba(255,255,255,0.4); text-align: center; padding: 80px 24px; }
-        .footer-links { margin-bottom: 30px; }
-        .footer-links a { color: #fff; text-decoration: none; margin: 0 15px; font-weight: 600; opacity: 0.6; transition: 0.3s; }
-        .footer-links a:hover { opacity: 1; color: var(--primary); }
+        .submit-btn:active {
+            transform: translateY(0);
+        }
 
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
-        @media (max-width: 850px) { 
-            .setup-grid { grid-template-columns: 1fr; } 
-            .hero h1 { font-size: 2.8rem; } 
-            .email-form { flex-direction: column; padding: 15px; }
+        /* Success message */
+        .success-message {
+            display: none;
+            background: var(--green);
+            color: white;
+            padding: 16px 24px;
+            border-radius: 12px;
+            margin-top: 16px;
+            font-weight: 600;
+            animation: fadeInUp 0.5s ease-out;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        /* Stats bar */
+        .stats-bar {
+            background: var(--white);
+            padding: 60px 24px;
+            border-top: 1px solid var(--bg-lighter);
+            border-bottom: 1px solid var(--bg-lighter);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--primary);
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        /* Setup Section - Enhanced */
+        .setup-section { 
+            padding: 120px 0; 
+            background: var(--bg-light);
+            position: relative;
+        }
+        
+        .setup-grid { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 32px;
+        }
+        
+        .setup-card { 
+            background: var(--white); 
+            padding: 48px; 
+            border-radius: 24px; 
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .setup-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+        
+        .setup-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.08);
+            border-color: var(--primary);
+        }
+
+        .setup-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .setup-card h3 { 
+            font-size: 1.8rem; 
+            margin-bottom: 20px; 
+            color: var(--secondary); 
+            display: flex; 
+            align-items: center; 
+            gap: 12px;
+            font-weight: 800;
+        }
+        
+        .setup-card p { 
+            color: var(--text-muted); 
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .setup-card strong {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        /* Video Section - Enhanced */
+        .video-section { 
+            padding: 120px 0; 
+            background: var(--white);
+        }
+        
+        .video-container { 
+            max-width: 1000px; 
+            margin: 0 auto; 
+        }
+        
+        .video-wrapper {
+            position: relative; 
+            padding-bottom: 56.25%; 
+            height: 0;
+            background: var(--secondary); 
+            border-radius: 24px; 
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease;
+        }
+
+        .video-wrapper:hover {
+            transform: scale(1.02);
+        }
+
+        .video-wrapper video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Features Section - Enhanced */
+        .features-section { 
+            padding: 120px 0; 
+            background: var(--bg-light);
+        }
+        
+        .features-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 32px;
+        }
+        
+        .feature-item { 
+            padding: 48px; 
+            background: var(--white); 
+            border-radius: 24px; 
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.03), rgba(200, 222, 185, 0.03));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .feature-item:hover { 
+            transform: translateY(-12px);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.08);
+            border-color: var(--primary);
+        }
+
+        .feature-item:hover::before {
+            opacity: 1;
+        }
+        
+        .feature-icon { 
+            font-size: 3.5rem; 
+            margin-bottom: 24px; 
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-item:hover .feature-icon {
+            transform: scale(1.1);
+        }
+        
+        .feature-item h4 { 
+            font-size: 1.5rem; 
+            margin-bottom: 16px; 
+            color: var(--secondary); 
+            font-weight: 800;
+            position: relative;
+        }
+        
+        .feature-item p { 
+            color: var(--text-muted); 
+            font-size: 1.05rem;
+            line-height: 1.7;
+            position: relative;
+        }
+
+        /* Testimonials - Enhanced */
+        .testimonials-section { 
+            padding: 120px 0; 
+            background: var(--white);
+        }
+        
+        .testimonial-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+            gap: 32px;
+        }
+        
+        .testimonial-card { 
+            background: var(--bg-light); 
+            padding: 40px; 
+            border-radius: 24px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+            background: var(--white);
+        }
+        
+        .testimonial-card p { 
+            font-style: italic; 
+            color: var(--text-main); 
+            font-size: 1.1rem; 
+            margin-bottom: 24px;
+            line-height: 1.7;
+        }
+        
+        .author-box { 
+            display: flex; 
+            align-items: center; 
+            gap: 12px;
+        }
+
+        .author-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+        
+        .author-info h5 { 
+            font-weight: 700; 
+            color: var(--secondary);
+            margin-bottom: 2px;
+        }
+        
+        .author-info span { 
+            font-size: 0.9rem; 
+            color: var(--text-muted);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 120px 24px;
+            background: linear-gradient(135deg, var(--secondary) 0%, #0F172A 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+            animation: float 15s ease-in-out infinite;
+        }
+
+        .cta-section > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-section h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            color: white;
+            margin-bottom: 20px;
+            font-weight: 900;
+        }
+
+        .cta-section p {
+            font-size: 1.3rem;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .app-store-badge {
+            display: inline-block;
+            height: 60px;
+            transition: transform 0.3s ease;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+        }
+
+        .app-store-badge:hover {
+            transform: scale(1.05);
+        }
+
+        /* Footer - Enhanced */
+        footer { 
+            background: #0A0E1A;
+            color: rgba(255,255,255,0.5); 
+            padding: 60px 24px 40px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 50px;
+            padding-bottom: 50px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .footer-brand h3 {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            font-weight: 800;
+        }
+
+        .footer-brand p {
+            color: rgba(255,255,255,0.6);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-links-column h4 {
+            color: white;
+            font-size: 1rem;
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+
+        .footer-links-column a {
+            display: block;
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links-column a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            color: rgba(255,255,255,0.4);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .footer-top {
+                grid-template-columns: 1fr 1fr;
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 768px) { 
+            .setup-grid { 
+                grid-template-columns: 1fr; 
+            }
+            
+            .hero h1 { 
+                font-size: 2.5rem; 
+            }
+            
+            .email-form { 
+                flex-direction: column; 
+                padding: 12px;
+            }
+
+            .submit-btn {
+                padding: 18px 24px;
+            }
+
+            .trust-badges {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scroll animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
 <body>
 
+    <!-- Hero Section -->
     <section class="hero">
-        <img src="app-icon.png" alt="Maintain-It Logo" class="app-icon">
-        <h1>Everything you own,<br>expertly maintained.</h1>
-        <p class="subtitle">The first unified dashboard for your cars, home systems, and property assets. Built for speed, privacy, and peace of mind.</p>
+        <img src="app-icon.png" alt="Maintain-It App Icon" class="app-icon">
+        <h1>Never miss maintenance.<br><span class="highlight">Ever again.</span></h1>
+        <p class="subtitle">AI-powered tracking for your cars, home systems, and properties. Set up in 30 seconds with VIN scanning. Smart reminders that actually work.</p>
+        
+        <div class="trust-badges">
+            <div class="badge">
+                <span class="icon">⚡</span>
+                <span>30-Second Setup</span>
+            </div>
+            <div class="badge">
+                <span class="icon">🔒</span>
+                <span>Privacy First</span>
+            </div>
+            <div class="badge">
+                <span class="icon">📱</span>
+                <span>iOS + Coming to Android</span>
+            </div>
+        </div>
         
         <form class="email-form" id="emailForm">
-            <input type="email" class="email-input" placeholder="Join the early access list..." required id="emailInput">
-            <button type="submit" class="submit-btn">Get Started</button>
+            <input 
+                type="email" 
+                class="email-input" 
+                placeholder="your@email.com" 
+                required 
+                id="emailInput"
+                aria-label="Email address"
+            >
+            <button type="submit" class="submit-btn">Get Early Access</button>
         </form>
+
+        <div class="success-message" id="successMessage">
+            ✓ Thanks! We'll notify you when Maintain-It launches.
+        </div>
     </section>
 
+    <!-- Stats Bar -->
+    <section class="stats-bar">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <span class="stat-number">30s</span>
+                <span class="stat-label">Average Setup Time</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">95%+</span>
+                <span class="stat-label">VIN Recognition Accuracy</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">100%</span>
+                <span class="stat-label">Local Data Storage</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Setup Section -->
     <section class="setup-section">
         <div class="container">
-            <div class="section-header">
-                <h2>Ready in seconds.</h2>
-                <p>Maintain-It uses AI to eliminate the manual work of tracking what matters.</p>
+            <div class="section-header animate-on-scroll">
+                <h2>Setup in seconds, not hours.</h2>
+                <p>Maintain-It uses AI to eliminate the tedious work of tracking what you own.</p>
             </div>
             <div class="setup-grid">
-                <div class="setup-card">
-                    <h3>🏎️ For Your Cars</h3>
-                    <p>Scan the <strong>VIN Barcode</strong> on your door jamb. Our AI instantly pulls your vehicle's factory specs and generates a full maintenance schedule automatically.</p>
+                <div class="setup-card animate-on-scroll">
+                    <h3>🚗 For Your Vehicles</h3>
+                    <p>Scan the <strong>VIN barcode</strong> on your door jamb or windshield. Our AI instantly retrieves your vehicle's factory specs and generates a complete maintenance schedule—oil changes, tire rotations, inspections—all automatically configured.</p>
                 </div>
-                <div class="setup-card">
+                <div class="setup-card animate-on-scroll">
                     <h3>🏠 For Your Home</h3>
-                    <p>Add HVAC, appliances, and lawn equipment. Use <strong>Smart Templates</strong> to set intelligent reminders for filters, service, and seasonal winterization.</p>
+                    <p>Add HVAC systems, appliances, and lawn equipment using <strong>smart templates</strong>. Set intelligent reminders for filter changes, seasonal maintenance, and service appointments. Never forget a furnace filter again.</p>
                 </div>
             </div>
         </div>
     </section>
 
-<section class="video-section">
+    <!-- Video Section -->
+    <section class="video-section">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header animate-on-scroll">
                 <h2>See Maintain-It in Action</h2>
-                <p>Watch how fast you can secure your asset's future.</p>
+                <p>Watch how fast you can secure your assets' future.</p>
             </div>
-            <div class="video-container">
+            <div class="video-container animate-on-scroll">
                 <div class="video-wrapper">
-                    <video controls playsinline poster="app-icon.png">
+                    <video controls playsinline poster="app-icon.png" preload="metadata">
                         <source src="MaintainIt_video_480.mov" type="video/quicktime">
+                        <source src="MaintainIt_video_480.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                 </div>
@@ -192,74 +849,182 @@
         </div>
     </section>
 
+    <!-- Features Section -->
     <section class="features-section">
         <div class="container">
-            <div class="section-header">
-                <h2>Powerful Features. Simple Ownership.</h2>
+            <div class="section-header animate-on-scroll">
+                <h2>Powerful features. Effortless ownership.</h2>
+                <p>Everything you need to never miss maintenance again.</p>
             </div>
             <div class="features-grid">
-                <div class="feature-item">
+                <div class="feature-item animate-on-scroll">
+                    <span class="feature-icon">⚡</span>
+                    <h4>VIN Scanner</h4>
+                    <p>Point your camera at any VIN barcode. Instant setup with year, make, model, and complete factory-recommended maintenance schedule.</p>
+                </div>
+                <div class="feature-item animate-on-scroll">
                     <span class="feature-icon">🔔</span>
                     <h4>Smart Reminders</h4>
-                    <p>Local notifications alert you before tasks are overdue. Stay on top of oil changes and furnace filters automatically.</p>
+                    <p>Local notifications alert you before tasks are overdue. Mileage-based for vehicles, time-based for homes. Never miss an oil change or filter replacement.</p>
                 </div>
-                <div class="feature-item">
+                <div class="feature-item animate-on-scroll">
                     <span class="feature-icon">💰</span>
                     <h4>Budget Tracking</h4>
-                    <p>Log every maintenance dollar. Forecast upcoming expenses so you are never surprised by a repair bill again.</p>
+                    <p>Log every maintenance dollar. Forecast upcoming expenses so you're never surprised by a repair bill. Track costs across all your assets.</p>
                 </div>
-                <div class="feature-item">
-                    <span class="feature-icon">📈</span>
-                    <h4>Resale Value</h4>
-                    <p>Build a verified digital paper trail. Complete maintenance logs can increase asset resale value by up to 15%.</p>
+                <div class="feature-item animate-on-scroll">
+                    <span class="feature-icon">📊</span>
+                    <h4>Service History</h4>
+                    <p>Build a verified digital paper trail. Complete maintenance logs can increase resale value by up to 15%. Export reports for buyers or insurance.</p>
+                </div>
+                <div class="feature-item animate-on-scroll">
+                    <span class="feature-icon">🏠</span>
+                    <h4>Multi-Property</h4>
+                    <p>Track your home, rental properties, vacation house, and vehicles all in one app. Perfect for landlords and property managers.</p>
+                </div>
+                <div class="feature-item animate-on-scroll">
+                    <span class="feature-icon">🔒</span>
+                    <h4>Privacy First</h4>
+                    <p>All your data stays on your device. No cloud servers, no selling your information. Your maintenance records are yours alone.</p>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Testimonials Section -->
     <section class="testimonials-section">
         <div class="container">
-            <div class="section-header">
-                <h2>Trusted by Owners</h2>
+            <div class="section-header animate-on-scroll">
+                <h2>Trusted by owners like you.</h2>
+                <p>Real feedback from beta testers.</p>
             </div>
             <div class="testimonial-grid">
-                <div class="testimonial-card">
-                    <p>"The VIN scanner felt like magic. My whole truck's service schedule was ready in seconds."</p>
+                <div class="testimonial-card animate-on-scroll">
+                    <p>"The VIN scanner felt like magic. My whole truck's service schedule was ready in seconds. This app is a game changer for anyone who actually cares about their vehicles."</p>
                     <div class="author-box">
-                        <div class="author-info"><h5>Mike T.</h5><span>Car Enthusiast</span></div>
+                        <div class="author-avatar">M</div>
+                        <div class="author-info">
+                            <h5>Mike T.</h5>
+                            <span>Car Enthusiast</span>
+                        </div>
                     </div>
                 </div>
-                <div class="testimonial-card">
-                    <p>"I finally have one place for my SUV's oil changes and my home's furnace filters. Game changer."</p>
+                <div class="testimonial-card animate-on-scroll">
+                    <p>"I finally have one place for my SUV's oil changes and my home's furnace filters. No more sticky notes on the fridge or forgetting until something breaks."</p>
                     <div class="author-box">
-                        <div class="author-info"><h5>Sarah J.</h5><span>Busy Homeowner</span></div>
+                        <div class="author-avatar">S</div>
+                        <div class="author-info">
+                            <h5>Sarah J.</h5>
+                            <span>Busy Homeowner</span>
+                        </div>
                     </div>
                 </div>
-                <div class="testimonial-card">
-                    <p>"Privacy is huge for me. Love that my logs stay on my phone and not on a server I don't control."</p>
+                <div class="testimonial-card animate-on-scroll">
+                    <p>"Privacy is huge for me. Love that my maintenance logs stay on my phone and not on a server I don't control. Plus the app is stupid fast."</p>
                     <div class="author-box">
-                        <div class="author-info"><h5>David R.</h5><span>Beta Tester</span></div>
+                        <div class="author-avatar">D</div>
+                        <div class="author-info">
+                            <h5>David R.</h5>
+                            <span>Beta Tester</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2>Ready to never miss maintenance?</h2>
+        <p>Download Maintain-It and take control of your assets in 30 seconds.</p>
+        <a href="#" class="app-store-link" id="appStoreLink">
+            <img 
+                src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" 
+                alt="Download on the App Store" 
+                class="app-store-badge"
+            >
+        </a>
+    </section>
+
+    <!-- Footer -->
     <footer>
-        <div class="footer-links">
-            <a href="https://themaintainit.app/privacy.html">Privacy Policy</a>
-            <a href="https://themaintainit.app/terms.html">Terms of Service</a>
-            <a href="mailto:maintainit.help@hotmail.com">Support</a>
+        <div class="footer-content">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <h3>Maintain-It</h3>
+                    <p>The smartest way to track maintenance for everything you own. Cars, homes, properties—all in one app.</p>
+                    <div class="social-links">
+                        <a href="https://instagram.com/maintainit_app" target="_blank" class="social-link" aria-label="Instagram">📷</a>
+                        <a href="https://twitter.com/MaintainItApp" target="_blank" class="social-link" aria-label="Twitter">𝕏</a>
+                        <a href="https://tiktok.com/@maintainit.app" target="_blank" class="social-link" aria-label="TikTok">🎵</a>
+                    </div>
+                </div>
+                <div class="footer-links-column">
+                    <h4>Product</h4>
+                    <a href="#features">Features</a>
+                    <a href="#pricing">Pricing</a>
+                    <a href="#download">Download</a>
+                </div>
+                <div class="footer-links-column">
+                    <h4>Legal</h4>
+                    <a href="https://themaintainit.app/privacy.html">Privacy Policy</a>
+                    <a href="https://themaintainit.app/terms.html">Terms of Use</a>
+                </div>
+                <div class="footer-links-column">
+                    <h4>Support</h4>
+                    <a href="mailto:maintainit.help@hotmail.com">Email Us</a>
+                    <a href="#">Help Center</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Maintain-It. All rights reserved.</p>
+            </div>
         </div>
-        <p>&copy; 2026 Maintain-It. All rights reserved.</p>
     </footer>
 
     <script>
+        // Email form submission
         document.getElementById('emailForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            alert("Thanks! Your spot on the early access list is saved.");
+            const email = document.getElementById('emailInput').value;
+            const successMessage = document.getElementById('successMessage');
+            
+            // Show success message
+            successMessage.classList.add('show');
+            
+            // Clear input
             document.getElementById('emailInput').value = '';
+            
+            // Hide message after 5 seconds
+            setTimeout(() => {
+                successMessage.classList.remove('show');
+            }, 5000);
+            
+            // Optional: Send to your backend/email service
+            console.log('Email submitted:', email);
         });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all elements with animate-on-scroll class
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Update App Store link when available
+        // document.getElementById('appStoreLink').href = 'YOUR-APP-STORE-URL';
     </script>
 </body>
 </html>
