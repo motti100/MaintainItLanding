@@ -6,12 +6,21 @@
     <title>maintainIt - Never Miss Maintenance Again</title>
     <meta name="description" content="Track cars, homes & properties with AI-powered VIN scanning. Smart reminders, budget planning, and service history all in one app.">
     
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
     
     <style>
+        :root {
+            --primary: #0066FF; /* Bright Tech Blue from icon */
+            --primary-dark: #0052CC;
+            --secondary: #1A2B3C; /* Deep Slate */
+            --text-gray: #5A6B7C;
+            --bg-light: #F4F7FA;
+            --white: #FFFFFF;
+            --success: #10B981;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -19,380 +28,365 @@
         }
         
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             line-height: 1.6;
-            color: #2C3E2F;
-            background: linear-gradient(135deg, #C8DEB9 0%, #B5D5A8 50%, #A8CCA0 100%);
-            min-height: 100vh;
+            color: var(--secondary);
+            background: var(--white);
+            overflow-x: hidden;
         }
         
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
+        
+        /* Global Styles & Utilities */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        h1, h2, h3 { letter-spacing: -0.02em; }
         
         /* Hero Section */
         .hero {
-            min-height: 100vh;
+            min-height: 95vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 40px 20px;
+            padding: 80px 24px;
             position: relative;
+            /* Subtle modern background radiance */
+            background: radial-gradient(circle at 50% 0%, rgba(0, 102, 255, 0.08) 0%, rgba(255,255,255,0) 70%);
         }
         
         .app-icon {
-            width: 140px;
-            height: 140px;
-            margin-bottom: 30px;
-            border-radius: 28px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-            animation: fadeInUp 0.8s ease-out;
+            width: 160px;
+            height: 160px;
+            margin-bottom: 40px;
+            /* Modern, deep shadow for pop */
+            filter: drop-shadow(0 20px 30px rgba(0, 102, 255, 0.2));
+            animation: float 6s ease-in-out infinite;
         }
         
         .hero h1 {
-            font-size: 3.5rem;
+            font-size: clamp(3rem, 5vw, 4.5rem); /* Responsive huge font */
             font-weight: 800;
-            color: #2C3E2F;
-            margin-bottom: 20px;
-            line-height: 1.2;
+            color: var(--secondary);
+            margin-bottom: 24px;
+            line-height: 1.1;
             animation: fadeInUp 0.8s ease-out 0.2s both;
         }
         
         .hero .subtitle {
-            font-size: 1.4rem;
-            color: #4A5240;
-            margin-bottom: 40px;
-            max-width: 600px;
+            font-size: 1.5rem;
+            color: var(--text-gray);
+            margin-bottom: 48px;
+            max-width: 650px;
+            font-weight: 500;
             animation: fadeInUp 0.8s ease-out 0.4s both;
         }
         
-        /* Email Form */
+        /* Modernized Email Form */
         .email-form {
             display: flex;
-            gap: 12px;
-            max-width: 500px;
+            gap: 8px;
+            max-width: 520px;
             width: 100%;
+            background: var(--white);
+            padding: 8px;
+            border-radius: 16px;
+            /* "Glass" style border and shadow */
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+            border: 1px solid rgba(0, 102, 255, 0.1);
             animation: fadeInUp 0.8s ease-out 0.6s both;
         }
         
         .email-input {
             flex: 1;
-            padding: 16px 24px;
-            font-size: 1rem;
-            border: 2px solid rgba(44, 62, 47, 0.1);
+            padding: 16px 20px;
+            font-size: 1.1rem;
+            border: none;
             border-radius: 12px;
-            background: white;
-            transition: all 0.3s ease;
             font-family: 'Inter', sans-serif;
+            color: var(--secondary);
         }
         
-        .email-input:focus {
-            outline: none;
-            border-color: #3B82F6;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-        }
+        .email-input:focus { outline: none; }
         
         .submit-btn {
             padding: 16px 32px;
-            font-size: 1rem;
-            font-weight: 600;
-            background: #3B82F6;
+            font-size: 1.1rem;
+            font-weight: 700;
+            background: var(--primary);
             color: white;
             border: none;
             border-radius: 12px;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-family: 'Inter', sans-serif;
             white-space: nowrap;
         }
         
         .submit-btn:hover {
-            background: #2563EB;
+            background: var(--primary-dark);
             transform: translateY(-2px);
-            box-shadow: 0 8px 16px rgba(59, 130, 246, 0.3);
-        }
-        
-        .submit-btn:active {
-            transform: translateY(0);
-        }
-        
-        .scroll-indicator {
-            position: absolute;
-            bottom: 40px;
-            font-size: 0.9rem;
-            color: rgba(44, 62, 47, 0.5);
-            font-style: italic;
-            animation: bounce 2s infinite;
-        }
-        
-        /* VIN Scanner Section */
-        .vin-section {
-            background: white;
-            padding: 100px 20px;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 60px;
-            color: #2C3E2F;
-        }
-        
-        .vin-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-        
-        .vin-image {
-            width: 100%;
-            border-radius: 16px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-        }
-        
-        .vin-steps {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-        }
-        
-        .step {
-            display: flex;
-            gap: 16px;
-        }
-        
-        .step-number {
-            flex-shrink: 0;
-            width: 40px;
-            height: 40px;
-            background: #3B82F6;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 1.2rem;
-        }
-        
-        .step-content h3 {
-            font-size: 1.3rem;
-            margin-bottom: 8px;
-            color: #2C3E2F;
-        }
-        
-        .step-content p {
-            color: #4A5240;
-            line-height: 1.6;
-        }
-        
-        /* Features Grid */
-        .features-section {
-            background: #F9FAFB;
-            padding: 100px 20px;
-        }
-        
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 32px;
-            margin-top: 60px;
-        }
-        
-        .feature-card {
-            background: white;
-            padding: 40px 32px;
-            border-radius: 16px;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 24px rgba(0,0,0,0.1);
-        }
-        
-        .feature-icon {
-            font-size: 3rem;
-            margin-bottom: 20px;
-        }
-        
-        .feature-card h3 {
-            font-size: 1.4rem;
-            margin-bottom: 12px;
-            color: #2C3E2F;
-        }
-        
-        .feature-card p {
-            color: #4A5240;
-            line-height: 1.6;
-        }
-        
-        /* CTA Section */
-        .cta-section {
-            background: #2C3E50;
-            color: white;
-            padding: 100px 20px;
-            text-align: center;
-        }
-        
-        .cta-section h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
-        
-        .cta-section p {
-            font-size: 1.2rem;
-            margin-bottom: 40px;
-            opacity: 0.9;
-        }
-        
-        .app-store-badge {
-            display: inline-block;
-            height: 60px;
-            transition: transform 0.3s ease;
-        }
-        
-        .app-store-badge:hover {
-            transform: scale(1.05);
-        }
-        
-        .social-links {
-            display: flex;
-            gap: 24px;
-            justify-content: center;
-            margin-top: 60px;
-            font-size: 2rem;
-        }
-        
-        .social-links a {
-            color: white;
-            text-decoration: none;
-            opacity: 0.8;
-            transition: opacity 0.3s ease;
-        }
-        
-        .social-links a:hover {
-            opacity: 1;
-        }
-        
-        footer {
-            background: #1a252f;
-            color: rgba(255,255,255,0.6);
-            text-align: center;
-            padding: 40px 20px;
-            font-size: 0.9rem;
-        }
-        
-        footer a {
-            color: rgba(255,255,255,0.8);
-            text-decoration: none;
-        }
-        
-        footer a:hover {
-            color: white;
-        }
-        
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateY(0);
-            }
-            40% {
-                transform: translateY(-10px);
-            }
-            60% {
-                transform: translateY(-5px);
-            }
-        }
-        
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero .subtitle {
-                font-size: 1.1rem;
-            }
-            
-            .email-form {
-                flex-direction: column;
-            }
-            
-            .vin-content {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-            
-            .features-grid {
-                grid-template-columns: 1fr;
-                gap: 24px;
-            }
-            
-            .section-title {
-                font-size: 2rem;
-            }
-            
-            .app-icon {
-                width: 100px;
-                height: 100px;
-            }
+            box-shadow: 0 10px 20px rgba(0, 102, 255, 0.3);
         }
         
         /* Success Message */
         .success-message {
             display: none;
-            background: #10B981;
-            color: white;
+            background: #ECFDF5;
+            color: var(--success);
+            border: 1px solid #A7F3D0;
             padding: 16px 24px;
             border-radius: 12px;
-            margin-top: 16px;
+            margin-top: 24px;
+            font-weight: 600;
             animation: fadeInUp 0.5s ease-out;
         }
+        .success-message.show { display: block; }
         
-        .success-message.show {
-            display: block;
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            font-size: 2rem;
+            color: var(--primary);
+            opacity: 0.5;
+            animation: bounce 2s infinite;
+        }
+        
+        /* Sections General */
+        .section-padding { padding: 120px 0; }
+        
+        .section-title {
+            font-size: 3rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 80px;
+            color: var(--secondary);
+        }
+        
+        /* VIN Scanner Section */
+        .vin-section { background: var(--white); }
+        
+        .vin-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+        
+        .vin-image-container {
+            position: relative;
+        }
+        
+        /* Abstract background blob behind image */
+        .vin-image-container::before {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120%; height: 120%;
+            background: radial-gradient(circle, rgba(0, 102, 255, 0.1) 0%, transparent 70%);
+            z-index: 0;
+        }
+        
+        .vin-image {
+            width: 100%;
+            border-radius: 24px;
+            /* Sleek, modern shadow */
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .vin-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+        
+        .step { display: flex; gap: 20px; }
+        
+        .step-number {
+            flex-shrink: 0;
+            width: 48px;
+            height: 48px;
+            background: var(--primary);
+            color: white;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.4rem;
+            box-shadow: 0 8px 16px rgba(0, 102, 255, 0.2);
+        }
+        
+        .step-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+            color: var(--secondary);
+        }
+        
+        .step-content p {
+            color: var(--text-gray);
+            font-size: 1.1rem;
+        }
+        
+        /* Features Grid */
+        .features-section { background: var(--bg-light); }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+        }
+        
+        .feature-card {
+            background: var(--white);
+            padding: 48px 32px;
+            border-radius: 24px;
+            text-align: center;
+            border: 1px solid rgba(0,0,0,0.04);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 40px rgba(0, 102, 255, 0.1);
+            border-color: rgba(0, 102, 255, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 3.5rem;
+            margin-bottom: 24px;
+            display: inline-block;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+            color: var(--secondary);
+        }
+        
+        .feature-card p {
+            color: var(--text-gray);
+            font-size: 1.1rem;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--secondary) 0%, #0F172A 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .cta-section h2 {
+            font-size: 3rem;
+            margin-bottom: 24px;
+            color: white;
+        }
+        
+        .cta-section p {
+            font-size: 1.4rem;
+            margin-bottom: 48px;
+            opacity: 0.9;
+        }
+        
+        .app-store-badge {
+            height: 64px;
+            transition: transform 0.3s ease;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2));
+        }
+        
+        .app-store-badge:hover { transform: scale(1.05); }
+        
+        .social-links {
+            display: flex;
+            gap: 32px;
+            justify-content: center;
+            margin-top: 64px;
+            font-size: 2.2rem;
+        }
+        
+        .social-links a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            opacity: 1;
+            transform: translateY(-3px);
+        }
+        
+        /* Footer */
+        footer {
+            background: #0F172A;
+            color: rgba(255,255,255,0.5);
+            text-align: center;
+            padding: 60px 24px;
+            font-size: 1rem;
+        }
+        
+        footer a {
+            color: white;
+            text-decoration: none;
+            margin: 0 12px;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+        
+        footer a:hover { opacity: 1; }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .vin-content { grid-template-columns: 1fr; gap: 60px; }
+            .vin-image-container { order: -1; } /* Image on top on mobile */
+            .section-title { font-size: 2.5rem; }
+        }
+        
+        @media (max-width: 768px) {
+            .hero { padding: 60px 24px; }
+            .app-icon { width: 120px; height: 120px; }
+            .hero h1 { font-size: 2.8rem; }
+            .hero .subtitle { font-size: 1.2rem; }
+            .email-form { flex-direction: column; padding: 16px; }
+            .submit-btn { width: 100%; }
+            .cta-section h2 { font-size: 2.2rem; }
         }
     </style>
 </head>
 <body>
     
-    <!-- Hero Section -->
     <section class="hero" id="hero">
-        <!-- Replace this URL with your actual app icon -->
-        <img src="https://via.placeholder.com/280x280/3B82F6/FFFFFF?text=maintainIt" alt="maintainIt App Icon" class="app-icon">
+        <img src="Assets/icons/Maintain_It_logo_v2.png" alt="maintainIt App Icon" class="app-icon">
         
         <h1>Never Miss Maintenance Again 🔧</h1>
         
-        <p class="subtitle">Track cars, homes & properties with AI-powered VIN scanning</p>
+        <p class="subtitle">Track cars, homes & properties with AI-powered VIN scanning.</p>
         
         <form class="email-form" id="emailForm">
             <input 
                 type="email" 
                 class="email-input" 
-                placeholder="Enter an email for early access"
+                placeholder="Enter your email for early access..."
                 required
                 id="emailInput"
             >
@@ -400,27 +394,27 @@
         </form>
         
         <div class="success-message" id="successMessage">
-            ✓ Thanks! We'll notify you when maintainIt launches.
+            Your spot is saved! We'll notify you when maintainIt launches.
         </div>
         
-        <div class="scroll-indicator">↓ Scroll for Features ↓</div>
+        <div class="scroll-indicator">↓</div>
     </section>
     
-    <!-- VIN Scanner Section -->
-    <section class="vin-section" id="vin-scanner">
+    <section class="vin-section section-padding" id="vin-scanner">
         <div class="container">
             <h2 class="section-title">Setup in 30 Seconds ⚡</h2>
             
             <div class="vin-content">
-                <!-- Replace with actual VIN scanning screenshot/GIF -->
-                <img src="https://via.placeholder.com/600x800/9BC4C7/FFFFFF?text=VIN+Scanner+Demo" alt="VIN Scanner Demo" class="vin-image">
+                <div class="vin-image-container">
+                    <img src="https://via.placeholder.com/600x800/F4F7FA/A0AEC0?text=App+Screenshot+Here" alt="VIN Scanner Demo" class="vin-image">
+                </div>
                 
                 <div class="vin-steps">
                     <div class="step">
                         <div class="step-number">1</div>
                         <div class="step-content">
                             <h3>Scan VIN Barcode</h3>
-                            <p>Point your camera at the VIN on your windshield or door jamb</p>
+                            <p>Point your camera at the VIN on your windshield or door jamb. Our AI detects it instantly.</p>
                         </div>
                     </div>
                     
@@ -428,7 +422,7 @@
                         <div class="step-number">2</div>
                         <div class="step-content">
                             <h3>AI Fills Everything</h3>
-                            <p>Year, make, model, and complete maintenance schedule generated instantly</p>
+                            <p>Year, make, model, and the complete factory maintenance schedule are generated automatically.</p>
                         </div>
                     </div>
                     
@@ -436,7 +430,7 @@
                         <div class="step-number">3</div>
                         <div class="step-content">
                             <h3>Start Tracking</h3>
-                            <p>Get reminders, log services, never miss maintenance</p>
+                            <p>Receive smart reminders and log services. Peace of mind, automated.</p>
                         </div>
                     </div>
                 </div>
@@ -444,60 +438,57 @@
         </div>
     </section>
     
-    <!-- Features Section -->
-    <section class="features-section" id="features">
+    <section class="features-section section-padding" id="features">
         <div class="container">
             <h2 class="section-title">Everything in One Place</h2>
             
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">⚡</div>
-                    <h3>VIN Scanner</h3>
-                    <p>Setup any vehicle instantly with AI-powered barcode scanning</p>
+                    <h3>AI VIN Scanner</h3>
+                    <p>Instant setup for any vehicle using advanced barcode scanning technology.</p>
                 </div>
                 
                 <div class="feature-card">
                     <div class="feature-icon">💰</div>
                     <h3>Budget Planner</h3>
-                    <p>Track maintenance costs and plan ahead to avoid surprises</p>
+                    <p>Forecast future maintenance costs and avoid expensive surprises down the road.</p>
                 </div>
                 
                 <div class="feature-card">
                     <div class="feature-icon">📊</div>
                     <h3>Service History</h3>
-                    <p>Complete records boost resale value by up to 15%</p>
+                    <p>Build digital records that can boost your vehicle's resale value by up to 15%.</p>
                 </div>
                 
                 <div class="feature-card">
                     <div class="feature-icon">🔔</div>
                     <h3>Smart Reminders</h3>
-                    <p>Get notified before tasks are overdue, never forget again</p>
+                    <p>Get timely local notifications before tasks are overdue. Never forget an oil change.</p>
                 </div>
                 
                 <div class="feature-card">
                     <div class="feature-icon">🏠</div>
                     <h3>Homes & Cars</h3>
-                    <p>Track vehicles, properties, and appliances all in one app</p>
+                    <p>A unified dashboard for vehicles, appliances, and property maintenance tasks.</p>
                 </div>
                 
                 <div class="feature-card">
                     <div class="feature-icon">📱</div>
-                    <h3>Multi-Property</h3>
-                    <p>Perfect for landlords, property managers, and car enthusiasts</p>
+                    <h3>Multi-Asset</h3>
+                    <p>Built for power users: landlords, property managers, and multi-car owners.</p>
                 </div>
             </div>
         </div>
     </section>
     
-    <!-- CTA Section -->
-    <section class="cta-section" id="download">
+    <section class="cta-section section-padding" id="download">
         <div class="container">
-            <h2>Ready to Never Miss Maintenance?</h2>
-            <p>Download maintainIt today and take control of your maintenance</p>
+            <h2>Ready for Effortless Ownership?</h2>
+            <p>Download maintainIt today and take control.</p>
             
-            <!-- Replace with your actual App Store link when live -->
             <a href="#" class="app-store-link">
-                <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" 
+                <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/white/en-us?size=250x83" 
                      alt="Download on the App Store" 
                      class="app-store-badge">
             </a>
@@ -510,58 +501,35 @@
         </div>
     </section>
     
-    <!-- Footer -->
     <footer>
-        <p>© 2025 maintainIt | <a href="#">Privacy</a> | <a href="#">Terms</a> | <a href="mailto:hello@themaintainit.app">Contact</a></p>
+        <p>© 2026 maintainIt | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a> | <a href="mailto:hello@themaintainit.app">Contact</a></p>
     </footer>
     
-    <!-- JavaScript -->
     <script>
         // Email Form Handling
         document.getElementById('emailForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            
-            const email = document.getElementById('emailInput').value;
+            const emailInput = document.getElementById('emailInput');
             const successMessage = document.getElementById('successMessage');
             
-            // Here you would normally send to your email service
-            // For now, just show success message
-            console.log('Email submitted:', email);
-            
-            // Show success message
-            successMessage.classList.add('show');
-            
-            // Clear form
-            document.getElementById('emailInput').value = '';
-            
-            // Hide message after 5 seconds
-            setTimeout(function() {
-                successMessage.classList.remove('show');
-            }, 5000);
-            
-            // Optional: Send to Google Sheets, Mailchimp, etc.
-            // Example: fetch('your-webhook-url', { method: 'POST', body: JSON.stringify({ email }) });
+            if(emailInput.value) {
+                console.log('Email submitted:', emailInput.value);
+                successMessage.classList.add('show');
+                emailInput.value = '';
+                setTimeout(() => {
+                    successMessage.classList.remove('show');
+                }, 5000);
+            }
         });
         
-        // Smooth scroll for anchor links
+        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
         });
-        
-        // Optional: Add Google Analytics
-        // window.dataLayer = window.dataLayer || [];
-        // function gtag(){dataLayer.push(arguments);}
-        // gtag('js', new Date());
-        // gtag('config', 'YOUR-GA-ID');
     </script>
     
 </body>
