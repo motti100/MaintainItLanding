@@ -8,14 +8,14 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --primary: #0066FF;
+            --primary: #0066FF; 
             --primary-dark: #0052CC;
-            --secondary: #0F172A;
-            --text-main: #1E293B;
+            --secondary: #0F172A; 
+            --text-main: #334155; 
             --text-muted: #64748B;
             --bg-light: #F8FAFC;
             --white: #FFFFFF;
@@ -32,7 +32,10 @@
         }
 
         html { scroll-behavior: smooth; }
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-header h2 { font-size: clamp(2rem, 4vw, 2.5rem); font-weight: 800; color: var(--secondary); margin-bottom: 15px; letter-spacing: -0.02em; }
+        .section-header p { font-size: 1.2rem; color: var(--text-muted); max-width: 700px; margin: 0 auto; }
 
         /* --- Hero Section --- */
         .hero {
@@ -43,33 +46,23 @@
             justify-content: center;
             text-align: center;
             padding: 100px 24px;
-            background: radial-gradient(circle at 50% 0%, rgba(0, 102, 255, 0.1) 0%, rgba(255,255,255,0) 75%);
+            background: radial-gradient(circle at 50% 0%, rgba(0, 102, 255, 0.08) 0%, rgba(255,255,255,0) 75%);
         }
         
         .app-icon {
-            width: 160px;
-            height: 160px;
-            margin-bottom: 40px;
-            border-radius: 32px;
+            width: 160px; height: 160px; margin-bottom: 40px; border-radius: 32px;
             filter: drop-shadow(0 20px 40px rgba(0, 102, 255, 0.25));
             animation: float 6s ease-in-out infinite;
         }
         
         .hero h1 { 
-            font-size: clamp(2.5rem, 6vw, 4.5rem); 
-            font-weight: 800; 
-            color: var(--secondary);
-            margin-bottom: 24px; 
-            line-height: 1.05;
-            letter-spacing: -0.03em;
+            font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 800; color: var(--secondary);
+            margin-bottom: 24px; line-height: 1.05; letter-spacing: -0.03em;
         }
 
         .hero .subtitle { 
-            font-size: 1.4rem; 
-            color: var(--text-muted); 
-            margin-bottom: 48px; 
-            max-width: 750px;
-            font-weight: 500;
+            font-size: clamp(1.1rem, 3vw, 1.4rem); color: var(--text-muted); margin-bottom: 48px; 
+            max-width: 750px; font-weight: 500;
         }
         
         .email-form {
@@ -80,69 +73,69 @@
         
         .email-input { flex: 1; padding: 16px 20px; font-size: 1.1rem; border: none; font-family: inherit; outline: none; }
         .submit-btn { 
-            padding: 16px 32px; font-size: 1.1rem; font-weight: 700; 
-            background: var(--primary); color: white; border: none; 
-            border-radius: 14px; cursor: pointer; transition: 0.3s; 
+            padding: 16px 32px; font-size: 1.1rem; font-weight: 700; background: var(--primary); color: white; 
+            border: none; border-radius: 14px; cursor: pointer; transition: 0.3s; white-space: nowrap;
         }
         .submit-btn:hover { background: var(--primary-dark); transform: translateY(-2px); }
 
         /* --- Setup Section --- */
         .setup-section { padding: 120px 0; background: var(--white); }
-        .section-header { text-align: center; margin-bottom: 60px; }
-        .section-header h2 { font-size: 2.5rem; font-weight: 800; margin-bottom: 15px; }
-
         .setup-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
         .setup-card { 
-            background: var(--bg-light); 
-            padding: 50px; 
-            border-radius: 30px; 
-            border: 1px solid rgba(0,0,0,0.03);
-            transition: 0.4s;
+            background: var(--bg-light); padding: 50px; border-radius: 30px; border: 1px solid rgba(0,0,0,0.03); transition: 0.4s;
         }
         .setup-card:hover { transform: translateY(-10px); background: white; box-shadow: 0 30px 60px rgba(0,0,0,0.05); }
-        .setup-card h3 { font-size: 1.8rem; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+        .setup-card h3 { font-size: 1.8rem; margin-bottom: 20px; color: var(--secondary); display: flex; align-items: center; gap: 12px; }
         .setup-card p { color: var(--text-muted); font-size: 1.15rem; }
 
-        /* --- Testimonials Section --- */
-        .testimonials-section { padding: 100px 0; background: #F1F5F9; }
-        .testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .testimonial-card { 
-            background: white; 
-            padding: 40px; 
-            border-radius: 24px; 
-            box-shadow: 0 10px 20px rgba(0,0,0,0.02);
-            position: relative;
+        /* --- Video Section --- */
+        .video-section { padding: 100px 0; background: var(--bg-light); }
+        .video-container { max-width: 900px; margin: 0 auto; }
+        .video-wrapper {
+            position: relative; padding-bottom: 56.25%; height: 0;
+            background: var(--secondary); border-radius: 32px; overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.2);
         }
-        .testimonial-card p { font-style: italic; color: var(--text-main); font-size: 1.1rem; margin-bottom: 20px; }
-        .testimonial-card .author { font-weight: 700; color: var(--primary); font-size: 0.95rem; }
-        .testimonial-card .role { color: var(--text-muted); font-size: 0.85rem; }
+        .video-placeholder {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            display: flex; align-items: center; justify-content: center; flex-direction: column;
+            color: white; background: linear-gradient(135deg, var(--secondary), var(--primary));
+        }
+        .play-btn { font-size: 5rem; cursor: pointer; transition: 0.3s; }
+        .play-btn:hover { transform: scale(1.1); }
 
-        /* --- Features Section --- */
-        .features-section { padding: 120px 0; background: var(--secondary); color: white; }
-        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        /* --- Features Section (Light & Foregrounded) --- */
+        .features-section { padding: 120px 0; background: var(--white); }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
         .feature-item { 
-            padding: 40px; 
-            background: rgba(255,255,255,0.03); 
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 24px; 
+            padding: 50px; background: var(--white); border-radius: 32px; 
+            border: 1px solid #F1F5F9; box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+            transition: all 0.3s ease;
         }
-        .feature-item h4 { font-size: 1.4rem; margin-bottom: 15px; color: var(--primary); }
-        .feature-item p { opacity: 0.8; }
+        .feature-item:hover { 
+            transform: translateY(-10px); border-color: var(--primary);
+            box-shadow: 0 20px 50px rgba(0, 102, 255, 0.08); 
+        }
+        .feature-icon { font-size: 3rem; margin-bottom: 25px; display: block; }
+        .feature-item h4 { font-size: 1.5rem; margin-bottom: 15px; color: var(--secondary); font-weight: 800; }
+        .feature-item p { color: var(--text-muted); font-size: 1.1rem; }
+
+        /* --- Testimonials --- */
+        .testimonials-section { padding: 100px 0; background: var(--bg-light); }
+        .testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .testimonial-card { background: var(--white); padding: 40px; border-radius: 24px; box-shadow: 0 5px 15px rgba(0,0,0,0.02); }
+        .testimonial-card p { font-style: italic; color: var(--text-main); font-size: 1.1rem; margin-bottom: 20px; }
+        .author-box { display: flex; align-items: center; gap: 12px; }
+        .author-info h5 { font-weight: 700; color: var(--primary); }
+        .author-info span { font-size: 0.85rem; color: var(--text-muted); }
 
         /* --- Footer --- */
-        footer { 
-            background: var(--secondary); 
-            color: rgba(255,255,255,0.4); 
-            text-align: center; 
-            padding: 80px 24px; 
-            border-top: 1px solid rgba(255,255,255,0.05); 
-        }
+        footer { background: var(--secondary); color: rgba(255,255,255,0.4); text-align: center; padding: 80px 24px; }
         .footer-links { margin-bottom: 30px; }
-        .footer-links a { color: #fff; text-decoration: none; margin: 0 15px; font-weight: 600; opacity: 0.6; }
+        .footer-links a { color: #fff; text-decoration: none; margin: 0 15px; font-weight: 600; opacity: 0.6; transition: 0.3s; }
         .footer-links a:hover { opacity: 1; color: var(--primary); }
 
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
-        
         @media (max-width: 850px) { 
             .setup-grid { grid-template-columns: 1fr; } 
             .hero h1 { font-size: 2.8rem; } 
@@ -153,9 +146,9 @@
 <body>
 
     <section class="hero">
-        <img src="Assets/icons/icon.png" alt="Maintain-It Logo" class="app-icon">
+        <img src="app-icon.png" alt="Maintain-It Logo" class="app-icon">
         <h1>Everything you own,<br>expertly maintained.</h1>
-        <p class="subtitle">The unified dashboard for your cars and home systems. Powered by AI, protected by local privacy.</p>
+        <p class="subtitle">The first unified dashboard for your cars, home systems, and property assets. Built for speed, privacy, and peace of mind.</p>
         
         <form class="email-form" id="emailForm">
             <input type="email" class="email-input" placeholder="Join the early access list..." required id="emailInput">
@@ -166,17 +159,59 @@
     <section class="setup-section">
         <div class="container">
             <div class="section-header">
-                <h2>Designed for real life.</h2>
-                <p>Maintain-It eliminates the manual work of ownership.</p>
+                <h2>Ready in seconds.</h2>
+                <p>Maintain-It uses AI to eliminate the manual work of tracking what matters.</p>
             </div>
             <div class="setup-grid">
                 <div class="setup-card">
                     <h3>🏎️ For Your Cars</h3>
-                    <p>Scan the <strong>VIN Barcode</strong>. Our AI pulls factory specs and generates a full maintenance schedule automatically. No typing required.</p>
+                    <p>Scan the <strong>VIN Barcode</strong> on your door jamb. Our AI instantly pulls your vehicle's factory specs and generates a full maintenance schedule automatically.</p>
                 </div>
                 <div class="setup-card">
                     <h3>🏠 For Your Home</h3>
-                    <p>Add HVAC and appliances. Use <strong>Intelligent Templates</strong> to set reminders for filters, service, and seasonal winterization.</p>
+                    <p>Add HVAC, appliances, and lawn equipment. Use <strong>Smart Templates</strong> to set intelligent reminders for filters, service, and seasonal winterization.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="video-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>See Maintain-It in Action</h2>
+                <p>Watch how fast you can secure your asset's future.</p>
+            </div>
+            <div class="video-container">
+                <div class="video-wrapper">
+                    <div class="video-placeholder">
+                        <div class="play-btn">▶️</div>
+                        <p style="font-weight:700; margin-top:10px;">Watch the 30-Second Demo</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Powerful Features. Simple Ownership.</h2>
+            </div>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <span class="feature-icon">🔔</span>
+                    <h4>Smart Reminders</h4>
+                    <p>Local notifications alert you before tasks are overdue. Stay on top of oil changes and furnace filters automatically.</p>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">💰</span>
+                    <h4>Budget Tracking</h4>
+                    <p>Log every maintenance dollar. Forecast upcoming expenses so you are never surprised by a repair bill again.</p>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">📈</span>
+                    <h4>Resale Value</h4>
+                    <p>Build a verified digital paper trail. Complete maintenance logs can increase asset resale value by up to 15%.</p>
                 </div>
             </div>
         </div>
@@ -185,42 +220,26 @@
     <section class="testimonials-section">
         <div class="container">
             <div class="section-header">
-                <h2>Loved by Owners</h2>
+                <h2>Trusted by Owners</h2>
             </div>
             <div class="testimonial-grid">
                 <div class="testimonial-card">
                     <p>"The VIN scanner felt like magic. My whole truck's service schedule was ready in seconds."</p>
-                    <div class="author">Mike T.</div>
-                    <div class="role">Car Enthusiast</div>
+                    <div class="author-box">
+                        <div class="author-info"><h5>Mike T.</h5><span>Car Enthusiast</span></div>
+                    </div>
                 </div>
                 <div class="testimonial-card">
                     <p>"I finally have one place for my SUV's oil changes and my home's furnace filters. Game changer."</p>
-                    <div class="author">Sarah J.</div>
-                    <div class="role">Busy Homeowner</div>
+                    <div class="author-box">
+                        <div class="author-info"><h5>Sarah J.</h5><span>Busy Homeowner</span></div>
+                    </div>
                 </div>
                 <div class="testimonial-card">
-                    <p>"Privacy is a huge deal for me. Love that my maintenance logs stay on my phone, not a server."</p>
-                    <div class="author">David R.</div>
-                    <div class="role">Beta Tester</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="features-section">
-        <div class="container">
-            <div class="features-grid">
-                <div class="feature-item">
-                    <h4>🔔 Smart Reminders</h4>
-                    <p>Local notifications alert you before tasks are overdue. Stay ahead without opening the app.</p>
-                </div>
-                <div class="feature-item">
-                    <h4>📈 Resale Value</h4>
-                    <p>Build a digital service history. Verified logs can increase an asset's value by up to 15%.</p>
-                </div>
-                <div class="feature-item">
-                    <h4>🔒 Private by Design</h4>
-                    <p>Your data stays on your device. No accounts required, no tracking, no server breaches.</p>
+                    <p>"Privacy is huge for me. Love that my logs stay on my phone and not on a server I don't control."</p>
+                    <div class="author-box">
+                        <div class="author-info"><h5>David R.</h5><span>Beta Tester</span></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -232,14 +251,13 @@
             <a href="https://themaintainit.app/terms.html">Terms of Service</a>
             <a href="mailto:maintainit.help@hotmail.com">Support</a>
         </div>
-        <p>&copy; 2026 Maintain-It. v1.0.0 All rights reserved.</p>
-     
+        <p>&copy; 2026 Maintain-It. All rights reserved.</p>
     </footer>
 
     <script>
         document.getElementById('emailForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            alert("Thanks! Your spot on the waitlist is saved.");
+            alert("Thanks! Your spot on the early access list is saved.");
             document.getElementById('emailInput').value = '';
         });
     </script>
