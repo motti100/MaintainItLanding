@@ -181,8 +181,8 @@
         }
         
         .app-icon {
-            width: 280px; 
-            height: 280px;
+            width: 140px; 
+            height: 140px; 
             margin-bottom: 40px; 
             border-radius: 32px;
             filter: drop-shadow(0 25px 50px rgba(59, 130, 246, 0.3));
@@ -1168,10 +1168,20 @@
 
             .exit-popup-content {
                 padding: 32px 24px;
+                width: 95%;
+                max-width: 500px;
             }
 
             .exit-popup-form {
                 flex-direction: column;
+            }
+
+            .exit-popup h3 {
+                font-size: 1.5rem;
+            }
+
+            .exit-popup p {
+                font-size: 1rem;
             }
 
             .comparison-table th,
@@ -1929,17 +1939,58 @@ document.getElementById('exitPopupForm').addEventListener('submit', async functi
             });
         });
 
-        // Exit intent popup
+        // Exit intent popup (works on desktop AND mobile)
         const exitPopup = document.getElementById('exitPopup');
         const exitPopupClose = document.getElementById('exitPopupClose');
         let exitIntentShown = false;
+        let scrollThreshold = false;
+        let timeOnPage = 0;
 
+        // Desktop: Mouse leave detection
         document.addEventListener('mouseleave', (e) => {
             if (e.clientY <= 0 && !exitIntentShown) {
                 exitPopup.classList.add('show');
                 exitIntentShown = true;
             }
         });
+
+        // Mobile: Show after 30 seconds OR when scrolling back up near top
+        // Timer-based trigger (30 seconds)
+        setTimeout(() => {
+            timeOnPage = 30;
+            if (!exitIntentShown && scrollThreshold) {
+                exitPopup.classList.add('show');
+                exitIntentShown = true;
+            }
+        }, 30000);
+
+        // Scroll-based trigger (scroll down 50%, then back up to top 20%)
+        let maxScroll = 0;
+        window.addEventListener('scroll', () => {
+            const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            
+            // Track maximum scroll depth
+            if (scrollPercent > maxScroll) {
+                maxScroll = scrollPercent;
+            }
+            
+            // If user scrolled past 50%, then scrolls back to top 20%
+            if (maxScroll > 50 && scrollPercent < 20 && !exitIntentShown) {
+                scrollThreshold = true;
+                if (timeOnPage >= 30) {
+                    exitPopup.classList.add('show');
+                    exitIntentShown = true;
+                }
+            }
+        });
+
+        // Alternative: Show on mobile after 45 seconds regardless
+        setTimeout(() => {
+            if (!exitIntentShown) {
+                exitPopup.classList.add('show');
+                exitIntentShown = true;
+            }
+        }, 45000);
 
         exitPopupClose.addEventListener('click', () => {
             exitPopup.classList.remove('show');
