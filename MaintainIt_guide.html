@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maintain-It | Professional Asset Protection Guide</title>
+    <style>
+        :root {
+            --primary: #3B82F6;
+            --secondary: #0F172A;
+            --accent: #10B981;
+            --text-main: #334155;
+            --text-light: #64748B;
+            --bg-page: #F1F5F9;
+            --bg-card: #FFFFFF;
+        }
+        body { font-family: 'Inter', -apple-system, sans-serif; line-height: 1.6; color: var(--text-main); background: var(--bg-page); margin: 0; padding: 40px 20px; }
+        .master-container { max-width: 900px; margin: 0 auto; background: var(--bg-card); border-radius: 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.08); overflow: hidden; }
+        
+        /* Header Section */
+        .header { background: var(--secondary); color: white; padding: 60px 40px; text-align: center; }
+        .header h1 { margin: 0; font-size: 2.5rem; font-weight: 900; letter-spacing: -0.04em; }
+        .header p { opacity: 0.8; font-size: 1.1rem; margin-top: 10px; }
+        
+        .content { padding: 50px; }
+        h2 { font-size: 1.5rem; color: var(--secondary); border-left: 4px solid var(--primary); padding-left: 15px; margin-top: 40px; font-weight: 800; display: flex; align-items: center; gap: 10px; }
+        h3 { font-size: 1.1rem; color: var(--secondary); margin-bottom: 15px; margin-top: 25px; }
+
+        /* Grid Layouts */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        .checklist-item { margin-bottom: 12px; font-size: 0.95rem; display: flex; align-items: flex-start; gap: 12px; }
+        .box-check { width: 18px; height: 18px; border: 2px solid var(--primary); border-radius: 4px; flex-shrink: 0; margin-top: 2px; }
+
+        /* Tables & Lists */
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; border-radius: 12px; overflow: hidden; border: 1px solid #E2E8F0; }
+        th { text-align: left; background: #F8FAFC; padding: 15px; font-weight: 700; color: var(--secondary); }
+        td { padding: 15px; border-bottom: 1px solid #E2E8F0; font-size: 0.95rem; }
+
+        /* Special Sections */
+        .pro-box { background: #F0F9FF; border-radius: 16px; padding: 30px; margin: 30px 0; border: 1px solid #BAE6FD; }
+        .landlord-accent { background: #F0FDF4; border-left: 4px solid var(--accent); padding: 25px; border-radius: 0 16px 16px 0; margin-top: 20px; }
+        
+        .footer { background: #F8FAFC; padding: 40px; text-align: center; border-top: 1px solid #E2E8F0; }
+        .footer p { margin: 5px 0; font-size: 0.9rem; color: var(--text-light); }
+        .brand-blue { color: var(--primary); font-weight: 800; }
+
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } .content { padding: 30px; } }
+    </style>
+</head>
+<body>
+
+<div class="master-container">
+    <div class="header">
+        <h1>Ultimate Asset Guide</h1>
+        <p>A Blueprint for Protecting Your Vehicles, Home, and Rental Portfolio</p>
+    </div>
+
+    <div class="content">
+        
+        <h2>🚗 47-Point Vehicle Precision Check</h2>
+        <p style="color:var(--text-light); margin-bottom: 25px;">Regular inspections increase resale value by up to 15%.</p>
+        
+        <div class="grid-2">
+            <div>
+                <h3>Mechanical Core</h3>
+                <div class="checklist-item"><div class="box-check"></div> Engine Oil Level & Viscosity</div>
+                <div class="checklist-item"><div class="box-check"></div> Cooling System (Flush every 30k miles)</div>
+                <div class="checklist-item"><div class="box-check"></div> Brake Fluid & Hydraulic Lines</div>
+                <div class="checklist-item"><div class="box-check"></div> Transmission Pan & Filter Check</div>
+                <div class="checklist-item"><div class="box-check"></div> Serpentine & Timing Belt Tension</div>
+            </div>
+            <div>
+                <h3>Safety & Handling</h3>
+                <div class="checklist-item"><div class="box-check"></div> Tire Pressure (PSI) & Even Wear</div>
+                <div class="checklist-item"><div class="box-check"></div> Brake Pad Thickness (3mm min)</div>
+                <div class="checklist-item"><div class="box-check"></div> Steering Rack & CV Boot Integrity</div>
+                <div class="checklist-item"><div class="box-check"></div> Battery CCA (Cold Cranking Amps)</div>
+                <div class="checklist-item"><div class="box-check"></div> Exterior Lighting & Wipers</div>
+            </div>
+        </div>
+
+        <h2>🏠 Residential Seasonal Calendar</h2>
+        <table>
+            <thead>
+                <tr><th>Season</th><th>Critical Maintenance Task</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>Spring</strong></td><td>Inspect roof for shingle damage; service A/C compressor.</td></tr>
+                <tr><td><strong>Summer</strong></td><td>Flush water heater; clean dryer vents to prevent fire risk.</td></tr>
+                <tr><td><strong>Fall</strong></td><td>HVAC furnace tune-up; drain exterior faucets & sprinklers.</td></tr>
+                <tr><td><strong>Winter</strong></td><td>Test Sump Pump; inspect attic for moisture/ice dams.</td></tr>
+            </tbody>
+        </table>
+
+        <h2>🏢 Landlord & Rental Essentials</h2>
+        <div class="landlord-accent">
+            <strong>Liability & Turnover Strategy:</strong>
+            <p style="font-size: 0.95rem; margin-top: 10px;">Protect your property investment and minimize tenant friction with these specialized tasks:</p>
+            <div class="grid-2" style="margin-top: 20px;">
+                <div>
+                    <div class="checklist-item"><div class="box-check"></div> <strong>Turnover:</strong> Rekey locks & update entry codes.</div>
+                    <div class="checklist-item"><div class="box-check"></div> <strong>Plumbing:</strong> Install flood sensors near washers.</div>
+                </div>
+                <div>
+                    <div class="checklist-item"><div class="box-check"></div> <strong>Safety:</strong> Test smoke/CO detectors (Semi-annually).</div>
+                    <div class="checklist-item"><div class="box-check"></div> <strong>Liability:</strong> Check handrails & egress window locks.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pro-box">
+            <h3 style="margin-top:0; color:var(--primary);">💰 The $5,000 Maintenance Rule</h3>
+            <p>Every <strong>$20 HVAC filter</strong> you change saves you <strong>$1,200</strong> in blower motor repairs. Every <strong>$60 oil change</strong> prevents a <strong>$4,500 engine rebuild</strong>. Maintenance isn't a cost—it's a profit strategy.</p>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p>Automate these tasks in <strong>30 seconds</strong> with the <span class="brand-blue">Maintain-It</span> app.</p>
+        <p>&copy; 2026 Maintain-It. All rights reserved.</p>
+    </div>
+</div>
+
+</body>
+</html>
