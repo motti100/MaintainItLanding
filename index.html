@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maintain-It | One App for Your Cars, Home & Property</title>
+    <meta name="description" content="AI-powered VIN scanning for cars and intelligent tracking for your home. Smart reminders and service history for all your assets.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #0066FF; 
+            --secondary: #0F172A; 
+            --text-main: #334155; 
+            --text-muted: #64748B;
+            --bg-light: #F8FAFC;
+            --line-color: rgba(0, 102, 255, 0.15);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; line-height: 1.6; color: var(--text-main); background: #fff; overflow-x: hidden; }
+        html { scroll-behavior: smooth; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+        /* --- Hero Section --- */
+        .hero { padding: 100px 24px 60px; text-align: center; background: radial-gradient(circle at 50% 0%, rgba(0, 102, 255, 0.08) 0%, #fff 75%); }
+        .app-icon-hero { width: 140px; height: 140px; margin-bottom: 30px; border-radius: 32px; filter: drop-shadow(0 20px 40px rgba(0, 102, 255, 0.2)); }
+        .hero h1 { font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 800; color: var(--secondary); margin-bottom: 20px; letter-spacing: -0.03em; }
+        .hero p { font-size: 1.25rem; color: var(--text-muted); margin-bottom: 40px; max-width: 700px; margin-inline: auto; }
+
+        /* --- Interactive Spoke Section --- */
+        .spoke-section { padding: 60px 0; background: #fff; position: relative; }
+        .spoke-container { position: relative; height: 850px; width: 100%; max-width: 1100px; margin: 0 auto; display: flex; justify-content: center; align-items: center; }
+        .center-logo { width: 160px; height: 160px; background: #fff; border-radius: 36px; z-index: 10; box-shadow: 0 20px 50px rgba(0, 102, 255, 0.15); display: flex; justify-content: center; align-items: center; animation: iconPop 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+        .center-logo img { width: 100%; border-radius: 36px; }
+        .connector { position: absolute; top: 50%; left: 50%; height: 2px; background: var(--line-color); transform-origin: left center; z-index: 1; width: 0; }
+        .feature-card { position: absolute; background: #fff; padding: 22px 28px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); border: 1px solid #F1F5F9; width: 280px; opacity: 0; transform: scale(0.9); z-index: 5; }
+        .feature-card strong { display: block; color: var(--secondary); font-size: 1.1rem; margin-bottom: 4px; }
+        .feature-card span { color: var(--text-muted); font-size: 0.95rem; }
+
+        /* Spoke Timings (0.8s Intervals) */
+        .line-1 { transform: rotate(220deg); animation: drawLine 0.4s forwards 0.4s; }
+        .card-1 { top: 12%; left: 5%; animation: popCard 0.4s forwards 0.7s; }
+        .line-2 { transform: rotate(-40deg); animation: drawLine 0.4s forwards 1.2s; }
+        .card-2 { top: 12%; right: 5%; animation: popCard 0.4s forwards 1.5s; }
+        .line-3 { transform: rotate(0deg); animation: drawLine 0.4s forwards 2.0s; }
+        .card-3 { top: 48%; right: 2%; animation: popCard 0.4s forwards 2.3s; }
+        .line-4 { transform: rotate(45deg); animation: drawLine 0.4s forwards 2.8s; }
+        .card-4 { bottom: 12%; right: 5%; animation: popCard 0.4s forwards 3.1s; }
+        .line-5 { transform: rotate(90deg); animation: drawLineLong 0.4s forwards 3.6s; } 
+        .card-5 { bottom: 2%; left: 50%; transform: translateX(-50%) scale(0.9); animation: popCardCenter 0.4s forwards 3.9s; }
+        .line-6 { transform: rotate(135deg); animation: drawLine 0.4s forwards 4.4s; }
+        .card-6 { bottom: 12%; left: 5%; animation: popCard 0.4s forwards 4.7s; }
+        .line-7 { transform: rotate(180deg); animation: drawLine 0.4s forwards 5.2s; }
+        .card-7 { top: 48%; left: 2%; animation: popCard 0.4s forwards 5.5s; }
+
+        /* --- Video & Hotspots --- */
+        .video-section { padding: 100px 0; background: var(--bg-light); }
+        .video-wrapper { position: relative; max-width: 900px; margin: 0 auto; border-radius: 32px; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.2); }
+        video { width: 100%; display: block; }
+        .hotspot { position: absolute; top: 20px; left: 20px; background: rgba(0, 102, 255, 0.9); color: white; padding: 10px 20px; border-radius: 12px; font-weight: 700; z-index: 10; opacity: 0; transition: 0.4s; pointer-events: none; }
+        .hotspot.active { opacity: 1; transform: translateY(0); }
+
+        /* --- Testimonials --- */
+        .testimonials { padding: 100px 0; background: #fff; }
+        .testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .t-card { padding: 40px; border-radius: 24px; background: var(--bg-light); }
+        .t-card p { font-style: italic; margin-bottom: 20px; font-size: 1.1rem; }
+        .t-card strong { color: var(--primary); }
+
+        /* --- Footer --- */
+        footer { padding: 80px 24px; background: var(--secondary); color: rgba(255,255,255,0.6); text-align: center; }
+        .footer-links { margin-bottom: 30px; }
+        .footer-links a { color: #fff; text-decoration: none; margin: 0 15px; font-weight: 600; opacity: 0.7; transition: 0.3s; }
+        .footer-links a:hover { opacity: 1; color: var(--primary); }
+
+        /* Animations */
+        @keyframes iconPop { from { opacity: 0; transform: scale(0.5); } to { opacity: 1; transform: scale(1); } }
+        @keyframes drawLine { to { width: 320px; } }
+        @keyframes drawLineLong { to { width: 380px; } }
+        @keyframes popCard { to { opacity: 1; transform: scale(1); } }
+        @keyframes popCardCenter { to { opacity: 1; transform: translateX(-50%) scale(1); } }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <div class="container">
+            <img src="Maintain_It_logo_v2.jpg" alt="Logo" class="app-icon-hero">
+            <h1>Maintain-It</h1>
+            <p>A unified dashboard for your cars, home systems, and property assets. AI-powered for speed, built for complete privacy.</p>
+        </div>
+    </section>
+
+    <section class="spoke-section">
+        <div class="container">
+            <div class="spoke-container">
+                <div class="connector line-1"></div><div class="connector line-2"></div><div class="connector line-3"></div>
+                <div class="connector line-4"></div><div class="connector line-5"></div><div class="connector line-6"></div><div class="connector line-7"></div>
+                <div class="center-logo"><img src="Maintain_It_logo_v2.jpg" alt="Maintain-It Icon"></div>
+
+                <div class="feature-card card-1"><strong>🏎️ AI VIN Scanner</strong><span>Auto-detect vehicle specs instantly.</span></div>
+                <div class="feature-card card-2"><strong>🏠 Home Systems</strong><span>Track HVAC, appliances & property.</span></div>
+                <div class="feature-card card-3"><strong>📄 Warranties</strong><span>Store documents & get expiration alerts.</span></div>
+                <div class="feature-card card-4"><strong>💰 Budget Tracking</strong><span>Log costs and forecast future repairs.</span></div>
+                <div class="feature-card card-5"><strong>📈 Pro Reports</strong><span>Export history to professional PDF or CSV.</span></div>
+                <div class="feature-card card-6"><strong>🔔 Smart Alerts</strong><span>Local notifications for all due tasks.</span></div>
+                <div class="feature-card card-7"><strong>🔒 Privacy First</strong><span>Encrypted data stays on your device.</span></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="video-section">
+        <div class="container">
+            <div class="video-wrapper">
+                <div id="h1" class="hotspot">Dashboard: All Assets in One Place</div>
+                <div id="h2" class="hotspot">Multi-Property Management</div>
+                <div id="h3" class="hotspot">AI VIN Scanner: Setup in Seconds</div>
+                <div id="h4" class="hotspot">Personalized Home Schedules</div>
+                <div id="h5" class="hotspot">Privacy First: Local & Encrypted</div>
+                <video id="v" controls playsinline poster="Maintain_It_logo_v2.jpg"><source src="MaintainIt.mp4" type="video/mp4"></video>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <div class="container">
+            <div class="testimonial-grid">
+                <div class="t-card"><p>"The VIN scanner felt like magic. My service schedule was ready in seconds."</p><strong>- Mike T.</strong></div>
+                <div class="t-card"><p>"I finally have one place for my SUV's oil changes and my home's furnace filters."</p><strong>- Sarah J.</strong></div>
+                <div class="t-card"><p>"Love that my logs stay on my phone and not on a server."</p><strong>- David R.</strong></div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-links">
+            <a href="https://themaintainit.app/privacy.html">Privacy Policy</a>
+            <a href="https://themaintainit.app/terms.html">Terms of Service</a>
+            <a href="mailto:maintainit.help@hotmail.com">Support</a>
+        </div>
+        <p>&copy; 2026 Maintain-It. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const v = document.getElementById('v');
+        const h = {'h1': {s: 0, e: 6}, 'h2': {s: 6, e: 26}, 'h3': {s: 27, e: 51}, 'h4': {s: 52, e: 107}, 'h5': {s: 108, e: 110}};
+        v.addEventListener('timeupdate', () => {
+            const t = v.currentTime;
+            for (const [id, r] of Object.entries(h)) {
+                const el = document.getElementById(id);
+                t >= r.s && t <= r.e ? el.classList.add('active') : el.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
