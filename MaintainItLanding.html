@@ -1110,7 +1110,7 @@
             .hero h1 { 
                 font-size: 2.5rem; 
             }
-            
+
             .app-icon {
                 width: 120px;
                 height: 120px;
@@ -1803,15 +1803,20 @@ document.getElementById('emailForm').addEventListener('submit', async function(e
     submitBtn.disabled = true;
     submitBtn.textContent = 'Sending...';
     
-    try {
+     try {
         // Send to Google Sheets
         const response = await fetch('https://script.google.com/macros/s/AKfycbzoGYxvQvWj3wmzD_xDdpoIMw4Vj9YkxFBhUzcvBytI2dHvRnHIDSGHOlKGTIzM-t5X/exec', {
             method: 'POST',
+            mode: 'no-cors', // Important for mobile browsers
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
             body: new URLSearchParams({
                 email: email,
                 source: 'hero-form'
             })
         });
+        
         
         const result = await response.json();
         
@@ -1847,9 +1852,13 @@ document.getElementById('exitPopupForm').addEventListener('submit', async functi
     submitBtn.disabled = true;
     submitBtn.textContent = 'Sending...';
     
-    try {
+ try {
         await fetch('https://script.google.com/macros/s/AKfycbzoGYxvQvWj3wmzD_xDdpoIMw4Vj9YkxFBhUzcvBytI2dHvRnHIDSGHOlKGTIzM-t5X/exec', {
             method: 'POST',
+            mode: 'no-cors', // Critical for mobile browsers
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
             body: new URLSearchParams({
                 email: email,
                 source: 'exit-popup'
