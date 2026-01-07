@@ -1793,6 +1793,7 @@
 
     <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // Email form submission
+// Hero form submission with user tracking
 document.getElementById('emailForm').addEventListener('submit', async function(e) {
     e.preventDefault();
     const email = document.getElementById('emailInput').value;
@@ -1802,22 +1803,40 @@ document.getElementById('emailForm').addEventListener('submit', async function(e
     submitBtn.disabled = true;
     submitBtn.textContent = 'Sending...';
     
-    // Use FormData for better mobile compatibility
+    // CAPTURE USER DATA
+    const userData = {
+        email: email,
+        source: 'hero-form',
+        userAgent: navigator.userAgent,
+        screenResolution: screen.width + 'x' + screen.height,
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        language: navigator.language,
+        referrer: document.referrer || 'Direct'
+    };
+    
+    // Get IP address (requires external service)
+    try {
+        const ipResponse = await fetch('https://api.ipify.org?format=json');
+        const ipData = await ipResponse.json();
+        userData.ipAddress = ipData.ip;
+    } catch (error) {
+        userData.ipAddress = 'Unknown';
+    }
+    
     const formData = new FormData();
-    formData.append('email', email);
-    formData.append('source', 'hero-form');
+    Object.keys(userData).forEach(key => {
+        formData.append(key, userData[key]);
+    });
     
     try {
-        const response = await fetch('https://script.google.com/macros/s/AKfycbyQdwuiAjVwcskS9BDGlRQevwLOyg-72iDW9PldmH59a62W7xiN-GjDsxx_am_uTOag/exec', {
+        const response = await fetch('https://script.google.com/macros/s/AKfycbzAA7QJ5lw0SuAgrOjMsqj8slkfvz19HpuAAPm28IANpGkl0wvu0ot8GmqiOLnu/exec', {
             method: 'POST',
             body: formData,
-            redirect: 'follow' 
+            redirect: 'follow'
         });
         
-        console.log('Response status:', response.status);
-        console.log('✅ Form submitted successfully');
+        console.log('✅ Form submitted with user data');
         
-        // Show success message
         successMessage.classList.add('show');
         document.getElementById('emailInput').value = '';
         
@@ -1828,22 +1847,19 @@ document.getElementById('emailForm').addEventListener('submit', async function(e
     } catch (error) {
         console.error('Form error:', error);
         
-        // Even if there's an error, the submission likely worked
-        // Mobile browsers can have CORS issues but the request still goes through
         successMessage.classList.add('show');
         document.getElementById('emailInput').value = '';
         
         setTimeout(() => {
             successMessage.classList.remove('show');
         }, 5000);
-        
     } finally {
         submitBtn.disabled = false;
         submitBtn.textContent = 'Start Free Trial';
     }
 });
 
-// Also handle exit popup form
+// Exit popup form with user tracking
 document.getElementById('exitPopupForm').addEventListener('submit', async function(e) {
     e.preventDefault();
     const email = document.getElementById('exitEmailInput').value;
@@ -1853,40 +1869,55 @@ document.getElementById('exitPopupForm').addEventListener('submit', async functi
     submitBtn.disabled = true;
     submitBtn.textContent = 'Sending...';
     
-    // Use FormData for better mobile compatibility
+    // CAPTURE USER DATA
+    const userData = {
+        email: email,
+        source: 'exit-popup',
+        userAgent: navigator.userAgent,
+        screenResolution: screen.width + 'x' + screen.height,
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        language: navigator.language,
+        referrer: document.referrer || 'Direct'
+    };
+    
+    // Get IP address
+    try {
+        const ipResponse = await fetch('https://api.ipify.org?format=json');
+        const ipData = await ipResponse.json();
+        userData.ipAddress = ipData.ip;
+    } catch (error) {
+        userData.ipAddress = 'Unknown';
+    }
+    
     const formData = new FormData();
-    formData.append('email', email);
-    formData.append('source', 'exit-popup');
+    Object.keys(userData).forEach(key => {
+        formData.append(key, userData[key]);
+    });
     
     try {
-        const response = await fetch('https://script.google.com/macros/s/AKfycbyQdwuiAjVwcskS9BDGlRQevwLOyg-72iDW9PldmH59a62W7xiN-GjDsxx_am_uTOag/exec', {
+        const response = await fetch('https://script.google.com/macros/s/AKfycbzAA7QJ5lw0SuAgrOjMsqj8slkfvz19HpuAAPm28IANpGkl0wvu0ot8GmqiOLnu/exec', {
             method: 'POST',
             body: formData,
             redirect: 'follow'
         });
         
-        console.log('Exit form status:', response.status);
-        console.log('✅ Exit form submitted successfully');
+        console.log('✅ Exit form submitted with user data');
         
-        alert('Thanks! Check your email for your free maintenance checklist (check spam folder too).');
+        alert('Thanks! Check your email for the download link (check spam folder too).');
         exitPopup.classList.remove('show');
         document.getElementById('exitEmailInput').value = '';
         
     } catch (error) {
         console.error('Exit form error:', error);
         
-        // Even if error, likely submitted successfully
-        alert('Thanks! Check your email for your free maintenance checklist (check spam folder too).');
+        alert('Thanks! Check your email for the download link (check spam folder too).');
         exitPopup.classList.remove('show');
         document.getElementById('exitEmailInput').value = '';
-        
     } finally {
         submitBtn.disabled = false;
         submitBtn.textContent = 'Send Me The Checklist';
     }
-});
-
-        // Rotating quotes
+});        // Rotating quotes
         let currentQuote = 0;
         const quotes = ['quote1', 'quote2', 'quote3', 'quote4', 'quote5'];
         
