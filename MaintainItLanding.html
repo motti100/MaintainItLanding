@@ -181,8 +181,8 @@
         }
         
         .app-icon {
-            width: 140px; 
-            height: 140px; 
+            width: 280px; 
+            height: 280px; 
             margin-bottom: 40px; 
             border-radius: 32px;
             filter: drop-shadow(0 25px 50px rgba(59, 130, 246, 0.3));
@@ -1110,7 +1110,12 @@
             .hero h1 { 
                 font-size: 2.5rem; 
             }
-            
+
+            .app-icon {
+                width: 120px;
+                height: 120px;
+                margin-bottom: 30px;
+            }
             .email-form { 
                 flex-direction: column; 
                 padding: 12px;
@@ -1834,7 +1839,7 @@ document.getElementById('emailForm').addEventListener('submit', async function(e
     }
 });
 
-// Also handle exit popup form (improved for mobile)
+// Also handle exit popup form
 document.getElementById('exitPopupForm').addEventListener('submit', async function(e) {
     e.preventDefault();
     const email = document.getElementById('exitEmailInput').value;
@@ -1844,7 +1849,7 @@ document.getElementById('exitPopupForm').addEventListener('submit', async functi
     submitBtn.disabled = true;
     submitBtn.textContent = 'Sending...';
     
-    try {
+ try {
         await fetch('https://script.google.com/macros/s/AKfycbzoGYxvQvWj3wmzD_xDdpoIMw4Vj9YkxFBhUzcvBytI2dHvRnHIDSGHOlKGTIzM-t5X/exec', {
             method: 'POST',
             mode: 'no-cors', // Critical for mobile browsers
@@ -1857,13 +1862,9 @@ document.getElementById('exitPopupForm').addEventListener('submit', async functi
             })
         });
         
-        console.log('Exit popup form submitted - email:', email);
-        
         alert('Thanks! Check your email for your free maintenance checklist.');
         exitPopup.classList.remove('show');
-        document.getElementById('exitEmailInput').value = ''; // Clear form
     } catch (error) {
-        console.error('Exit popup form error:', error);
         alert('Oops! Something went wrong. Please try again.');
     } finally {
         submitBtn.disabled = false;
