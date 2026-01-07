@@ -1805,8 +1805,8 @@ document.getElementById('emailForm').addEventListener('submit', async function(e
     
     try {
         // Send to Google Sheets
-        const response = await fetch('https://script.google.com/macros/s/AKfycbzoGYxvQvWj3wmzD_xDdpoIMw4Vj9YkxFBhUzcvBytI2dHvRnHIDSGHOlKGTIzM-t5X/exec', {
-            method: 'POST',
+        const response = await fetch('https://script.google.com/macros/s/AKfycbzAA7QJ5lw0SuAgrOjMsqj8slkfvz19HpuAAPm28IANpGklOwvu0ot8GmqiOLnuXYY3/exec', {
+            method: 'POST',           
             mode: 'no-cors', // Important for mobile browsers
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -1850,7 +1850,7 @@ document.getElementById('exitPopupForm').addEventListener('submit', async functi
     submitBtn.textContent = 'Sending...';
     
  try {
-        await fetch('https://script.google.com/macros/s/AKfycbzoGYxvQvWj3wmzD_xDdpoIMw4Vj9YkxFBhUzcvBytI2dHvRnHIDSGHOlKGTIzM-t5X/exec', {
+        await fetch('https://script.google.com/macros/s/AKfycbzAA7QJ5lw0SuAgrOjMsqj8slkfvz19HpuAAPm28IANpGklOwvu0ot8GmqiOLnuXYY3/exec', {
             method: 'POST',
             mode: 'no-cors', // Critical for mobile browsers
             headers: {
