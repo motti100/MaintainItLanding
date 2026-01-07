@@ -2114,16 +2114,16 @@
         </div>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-// Email form submission
-
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script>
+// Email form submission - HERO FORM
 document.getElementById('emailForm').addEventListener('submit', async function(e) {
     e.preventDefault();
     const firstName = document.getElementById('firstNameInput').value;
     const lastName = document.getElementById('lastNameInput').value;
     const email = document.getElementById('emailInput').value;
     const successMessage = document.getElementById('successMessage');
-    const submitBtn = this.querySelector('.submit-btn');
+    const submitBtn = this.querySelector('.submit-btn-full'); // FIXED: Changed from .submit-btn to .submit-btn-full
     
     submitBtn.disabled = true;
     submitBtn.textContent = 'Sending...';
@@ -2151,7 +2151,7 @@ document.getElementById('emailForm').addEventListener('submit', async function(e
     }
     
     try {
-        const response = await fetch('https://script.google.com/macros/s/AKfycbyQdwuiAjVwcskS9BDGlRQevwLOyg-72iDW9PldmH59a62W7xiN-GjDsxx_am_uTOag/exec', {
+        const response = await fetch('https://script.google.com/macros/s/AKfycbzAA7QJ5lw0SuAgrOjMsqj8slkfvz19HpuAAPm28IANpGkl0wvu0ot8GmqiOLnu/exec', {
             method: 'POST',
             body: formData,
             redirect: 'follow'
@@ -2186,13 +2186,14 @@ document.getElementById('emailForm').addEventListener('submit', async function(e
     }
 });
 
+// EXIT POPUP FORM
 document.getElementById('exitPopupForm').addEventListener('submit', async function(e) {
     e.preventDefault();
     const firstName = document.getElementById('exitFirstNameInput').value;
     const lastName = document.getElementById('exitLastNameInput').value;
     const email = document.getElementById('exitEmailInput').value;
     const exitPopup = document.getElementById('exitPopup');
-    const submitBtn = this.querySelector('.exit-popup-btn');
+    const submitBtn = this.querySelector('.exit-popup-btn-full'); // FIXED: Changed from .exit-popup-btn to .exit-popup-btn-full
     
     submitBtn.disabled = true;
     submitBtn.textContent = 'Sending...';
@@ -2220,7 +2221,7 @@ document.getElementById('exitPopupForm').addEventListener('submit', async functi
     }
     
     try {
-        const response = await fetch('https://script.google.com/macros/s/AKfycbyQdwuiAjVwcskS9BDGlRQevwLOyg-72iDW9PldmH59a62W7xiN-GjDsxx_am_uTOag/exec', {
+        const response = await fetch('https://script.google.com/macros/s/AKfycbzAA7QJ5lw0SuAgrOjMsqj8slkfvz19HpuAAPm28IANpGkl0wvu0ot8GmqiOLnu/exec', {
             method: 'POST',
             body: formData,
             redirect: 'follow'
@@ -2248,168 +2249,163 @@ document.getElementById('exitPopupForm').addEventListener('submit', async functi
         submitBtn.textContent = 'Send Me The Checklist';
     }
 });
-        // Rotating quotes
-        let currentQuote = 0;
-        const quotes = ['quote1', 'quote2', 'quote3', 'quote4', 'quote5'];
-        
-        function rotateQuotes() {
-            document.getElementById(quotes[currentQuote]).classList.remove('active');
-            currentQuote = (currentQuote + 1) % quotes.length;
-            document.getElementById(quotes[currentQuote]).classList.add('active');
+
+// Rotating quotes
+let currentQuote = 0;
+const quotes = ['quote1', 'quote2', 'quote3', 'quote4', 'quote5'];
+
+function rotateQuotes() {
+    document.getElementById(quotes[currentQuote]).classList.remove('active');
+    currentQuote = (currentQuote + 1) % quotes.length;
+    document.getElementById(quotes[currentQuote]).classList.add('active');
+}
+
+setInterval(rotateQuotes, 5000);
+
+// Sticky header
+let lastScroll = 0;
+const stickyHeader = document.getElementById('stickyHeader');
+
+window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+    
+    if (currentScroll > 500) {
+        stickyHeader.classList.add('visible');
+    } else {
+        stickyHeader.classList.remove('visible');
+    }
+    
+    lastScroll = currentScroll;
+});
+
+// Animated counters
+function animateCounter(element) {
+    const target = parseInt(element.getAttribute('data-target'));
+    const duration = 2000;
+    const increment = target / (duration / 16);
+    let current = 0;
+    
+    const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+            element.textContent = target;
+            clearInterval(timer);
+        } else {
+            element.textContent = Math.floor(current);
         }
-        
-        setInterval(rotateQuotes, 5000);
+    }, 16);
+}
 
-        // Sticky header
-        let lastScroll = 0;
-        const stickyHeader = document.getElementById('stickyHeader');
-
-        window.addEventListener('scroll', () => {
-            const currentScroll = window.pageYOffset;
-            
-            if (currentScroll > 500) {
-                stickyHeader.classList.add('visible');
-            } else {
-                stickyHeader.classList.remove('visible');
-            }
-            
-            lastScroll = currentScroll;
-        });
-
-        // Animated counters
-        function animateCounter(element) {
-            const target = parseInt(element.getAttribute('data-target'));
-            const duration = 2000;
-            const increment = target / (duration / 16);
-            let current = 0;
-            
-            const timer = setInterval(() => {
-                current += increment;
-                if (current >= target) {
-                    element.textContent = target;
-                    clearInterval(timer);
-                } else {
-                    element.textContent = Math.floor(current);
-                }
-            }, 16);
+// Trigger counter animation when stats come into view
+const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const counters = entry.target.querySelectorAll('[data-target]');
+            counters.forEach(counter => animateCounter(counter));
+            statsObserver.unobserve(entry.target);
         }
+    });
+}, { threshold: 0.5 });
 
-        // Trigger counter animation when stats come into view
-        const statsObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const counters = entry.target.querySelectorAll('[data-target]');
-                    counters.forEach(counter => animateCounter(counter));
-                    statsObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.5 });
+const statsBar = document.querySelector('.stats-bar');
+if (statsBar) statsObserver.observe(statsBar);
 
-        const statsBar = document.querySelector('.stats-bar');
-        if (statsBar) statsObserver.observe(statsBar);
-
-        // FAQ Accordion
-        document.querySelectorAll('.faq-question').forEach(question => {
-            question.addEventListener('click', () => {
-                const faqItem = question.parentElement;
-                const isActive = faqItem.classList.contains('active');
-                
-                // Close all other items
-                document.querySelectorAll('.faq-item').forEach(item => {
-                    item.classList.remove('active');
-                });
-                
-                // Toggle current item
-                if (!isActive) {
-                    faqItem.classList.add('active');
-                }
-            });
+// FAQ Accordion
+document.querySelectorAll('.faq-question').forEach(question => {
+    question.addEventListener('click', () => {
+        const faqItem = question.parentElement;
+        const isActive = faqItem.classList.contains('active');
+        
+        // Close all other items
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.classList.remove('active');
         });
+        
+        // Toggle current item
+        if (!isActive) {
+            faqItem.classList.add('active');
+        }
+    });
+});
 
-        // Exit intent popup (works on desktop AND mobile)
-        const exitPopup = document.getElementById('exitPopup');
-        const exitPopupClose = document.getElementById('exitPopupClose');
-        let exitIntentShown = false;
-        let scrollThreshold = false;
-        let timeOnPage = 0;
+// Exit intent popup
+const exitPopup = document.getElementById('exitPopup');
+const exitPopupClose = document.getElementById('exitPopupClose');
+let exitIntentShown = false;
+let scrollThreshold = false;
+let timeOnPage = 0;
 
-        // Desktop: Mouse leave detection
-        document.addEventListener('mouseleave', (e) => {
-            if (e.clientY <= 0 && !exitIntentShown) {
-                exitPopup.classList.add('show');
-                exitIntentShown = true;
-            }
-        });
+// Desktop: Mouse leave detection
+document.addEventListener('mouseleave', (e) => {
+    if (e.clientY <= 0 && !exitIntentShown) {
+        exitPopup.classList.add('show');
+        exitIntentShown = true;
+    }
+});
 
-        // Mobile: Show after 30 seconds OR when scrolling back up near top
-        // Timer-based trigger (30 seconds)
-        setTimeout(() => {
-            timeOnPage = 30;
-            if (!exitIntentShown && scrollThreshold) {
-                exitPopup.classList.add('show');
-                exitIntentShown = true;
-            }
-        }, 30000);
+// Mobile: Show after 30 seconds OR when scrolling back up near top
+setTimeout(() => {
+    timeOnPage = 30;
+    if (!exitIntentShown && scrollThreshold) {
+        exitPopup.classList.add('show');
+        exitIntentShown = true;
+    }
+}, 30000);
 
-        // Scroll-based trigger (scroll down 50%, then back up to top 20%)
-        let maxScroll = 0;
-        window.addEventListener('scroll', () => {
-            const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-            
-            // Track maximum scroll depth
-            if (scrollPercent > maxScroll) {
-                maxScroll = scrollPercent;
-            }
-            
-            // If user scrolled past 50%, then scrolls back to top 20%
-            if (maxScroll > 50 && scrollPercent < 20 && !exitIntentShown) {
-                scrollThreshold = true;
-                if (timeOnPage >= 30) {
-                    exitPopup.classList.add('show');
-                    exitIntentShown = true;
-                }
-            }
-        });
+// Scroll-based trigger
+let maxScroll = 0;
+window.addEventListener('scroll', () => {
+    const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+    
+    if (scrollPercent > maxScroll) {
+        maxScroll = scrollPercent;
+    }
+    
+    if (maxScroll > 50 && scrollPercent < 20 && !exitIntentShown) {
+        scrollThreshold = true;
+        if (timeOnPage >= 30) {
+            exitPopup.classList.add('show');
+            exitIntentShown = true;
+        }
+    }
+});
 
-        // Alternative: Show on mobile after 45 seconds regardless
-        setTimeout(() => {
-            if (!exitIntentShown) {
-                exitPopup.classList.add('show');
-                exitIntentShown = true;
-            }
-        }, 45000);
+// Alternative: Show on mobile after 45 seconds
+setTimeout(() => {
+    if (!exitIntentShown) {
+        exitPopup.classList.add('show');
+        exitIntentShown = true;
+    }
+}, 45000);
 
-        exitPopupClose.addEventListener('click', () => {
-            exitPopup.classList.remove('show');
-        });
+exitPopupClose.addEventListener('click', () => {
+    exitPopup.classList.remove('show');
+});
 
-        exitPopup.addEventListener('click', (e) => {
-            if (e.target === exitPopup) {
-                exitPopup.classList.remove('show');
-            }
-        });
+exitPopup.addEventListener('click', (e) => {
+    if (e.target === exitPopup) {
+        exitPopup.classList.remove('show');
+    }
+});
 
-        // Exit popup form handler already defined above (lines 1826-1852)
-        // Duplicate removed to prevent double alerts
+// Scroll animations
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
 
-        // Scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('animated');
+        }
+    });
+}, observerOptions);
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animated');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.animate-on-scroll').forEach(el => {
-            observer.observe(el);
-        });
-    </script>
+document.querySelectorAll('.animate-on-scroll').forEach(el => {
+    observer.observe(el);
+});
+</script>
 </body>
 </html>
         
