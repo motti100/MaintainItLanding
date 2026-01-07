@@ -1619,7 +1619,7 @@
                         <span class="faq-icon">+</span>
                     </div>
                     <div class="faq-answer">
-                        <p>Absolutely! You can export your complete service history as a PDF or CSV report perfect for showing potential buyers, insurance companies, or mechanics. The report includes all maintenance dates, costs, mileage, and service provider information.</p>
+                        <p>Absolutely! You can export your complete service history as a PDF report perfect for showing potential buyers, insurance companies, or mechanics. The report includes all maintenance dates, costs, mileage, and service provider information.</p>
                     </div>
                 </div>
 
@@ -1639,7 +1639,7 @@
                         <span class="faq-icon">+</span>
                     </div>
                     <div class="faq-answer">
-                        <p>Yes! Maintain-It is designed to track maintenance for cars, homes, rental properties, and vacation houses. All in one app with smart reminders customized for each asset type.</p>
+                        <p>Yes! Maintain-It is designed to track maintenance for everything you own—cars, trucks, motorcycles, RVs, homes, rental properties, vacation houses, and even boats. All in one app with smart reminders customized for each asset type.</p>
                     </div>
                 </div>
 
@@ -1649,7 +1649,7 @@
                         <span class="faq-icon">+</span>
                     </div>
                     <div class="faq-answer">
-                        <p>Our AI-powered VIN scanner has 95%+ accuracy rate and works in various lighting conditions. It instantly pulls your vehicle's year, make, model, engine specs, from the NHTSA database. If scanning doesn't work, you can also manually enter the VIN.</p>
+                        <p>Our AI-powered VIN scanner has 95%+ accuracy rate and works in various lighting conditions. It instantly pulls your vehicle's year, make, model, engine specs, and factory-recommended maintenance schedule from the NHTSA database. If scanning doesn't work, you can also manually enter the VIN.</p>
                     </div>
                 </div>
 
@@ -1793,7 +1793,6 @@
 
     <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // Email form submission
-// Hero form submission with user tracking
 document.getElementById('emailForm').addEventListener('submit', async function(e) {
     e.preventDefault();
     const email = document.getElementById('emailInput').value;
@@ -1804,29 +1803,24 @@ document.getElementById('emailForm').addEventListener('submit', async function(e
     submitBtn.textContent = 'Sending...';
     
     // CAPTURE USER DATA
-    const userData = {
-        email: email,
-        source: 'hero-form',
-        userAgent: navigator.userAgent,
-        screenResolution: screen.width + 'x' + screen.height,
-        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-        language: navigator.language,
-        referrer: document.referrer || 'Direct'
-    };
+    const formData = new FormData();
+    formData.append('email', email);
+    formData.append('source', 'hero-form');
+    formData.append('userAgent', navigator.userAgent);
+    formData.append('screenResolution', screen.width + 'x' + screen.height);
+    formData.append('timezone', Intl.DateTimeFormat().resolvedOptions().timeZone);
+    formData.append('language', navigator.language);
+    formData.append('referrer', document.referrer || 'Direct');
     
-    // Get IP address (requires external service)
+    // Get IP address (async)
     try {
         const ipResponse = await fetch('https://api.ipify.org?format=json');
         const ipData = await ipResponse.json();
-        userData.ipAddress = ipData.ip;
+        formData.append('ipAddress', ipData.ip);
     } catch (error) {
-        userData.ipAddress = 'Unknown';
+        formData.append('ipAddress', 'Unknown');
+        console.log('Could not fetch IP:', error);
     }
-    
-    const formData = new FormData();
-    Object.keys(userData).forEach(key => {
-        formData.append(key, userData[key]);
-    });
     
     try {
         const response = await fetch('https://script.google.com/macros/s/AKfycbyQdwuiAjVwcskS9BDGlRQevwLOyg-72iDW9PldmH59a62W7xiN-GjDsxx_am_uTOag/exec', {
@@ -1835,7 +1829,8 @@ document.getElementById('emailForm').addEventListener('submit', async function(e
             redirect: 'follow'
         });
         
-        console.log('✅ Form submitted with user data');
+        console.log('Response status:', response.status);
+        console.log('✅ Form submitted with tracking data');
         
         successMessage.classList.add('show');
         document.getElementById('emailInput').value = '';
@@ -1859,7 +1854,7 @@ document.getElementById('emailForm').addEventListener('submit', async function(e
     }
 });
 
-// Exit popup form with user tracking
+// Also handle exit popup form
 document.getElementById('exitPopupForm').addEventListener('submit', async function(e) {
     e.preventDefault();
     const email = document.getElementById('exitEmailInput').value;
@@ -1870,29 +1865,24 @@ document.getElementById('exitPopupForm').addEventListener('submit', async functi
     submitBtn.textContent = 'Sending...';
     
     // CAPTURE USER DATA
-    const userData = {
-        email: email,
-        source: 'exit-popup',
-        userAgent: navigator.userAgent,
-        screenResolution: screen.width + 'x' + screen.height,
-        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-        language: navigator.language,
-        referrer: document.referrer || 'Direct'
-    };
+    const formData = new FormData();
+    formData.append('email', email);
+    formData.append('source', 'exit-popup');
+    formData.append('userAgent', navigator.userAgent);
+    formData.append('screenResolution', screen.width + 'x' + screen.height);
+    formData.append('timezone', Intl.DateTimeFormat().resolvedOptions().timeZone);
+    formData.append('language', navigator.language);
+    formData.append('referrer', document.referrer || 'Direct');
     
-    // Get IP address
+    // Get IP address (async)
     try {
         const ipResponse = await fetch('https://api.ipify.org?format=json');
         const ipData = await ipResponse.json();
-        userData.ipAddress = ipData.ip;
+        formData.append('ipAddress', ipData.ip);
     } catch (error) {
-        userData.ipAddress = 'Unknown';
+        formData.append('ipAddress', 'Unknown');
+        console.log('Could not fetch IP:', error);
     }
-    
-    const formData = new FormData();
-    Object.keys(userData).forEach(key => {
-        formData.append(key, userData[key]);
-    });
     
     try {
         const response = await fetch('https://script.google.com/macros/s/AKfycbyQdwuiAjVwcskS9BDGlRQevwLOyg-72iDW9PldmH59a62W7xiN-GjDsxx_am_uTOag/exec', {
@@ -1901,23 +1891,27 @@ document.getElementById('exitPopupForm').addEventListener('submit', async functi
             redirect: 'follow'
         });
         
-        console.log('✅ Exit form submitted with user data');
+        console.log('Exit form status:', response.status);
+        console.log('✅ Exit form submitted with tracking data');
         
-        alert('Thanks! Check your email for the download link (check spam folder too).');
+        alert('Thanks! Check your email for your free maintenance checklist (check spam folder too).');
         exitPopup.classList.remove('show');
         document.getElementById('exitEmailInput').value = '';
         
     } catch (error) {
         console.error('Exit form error:', error);
         
-        alert('Thanks! Check your email for the download link (check spam folder too).');
+        alert('Thanks! Check your email for your free maintenance checklist (check spam folder too).');
         exitPopup.classList.remove('show');
         document.getElementById('exitEmailInput').value = '';
+        
     } finally {
         submitBtn.disabled = false;
         submitBtn.textContent = 'Send Me The Checklist';
     }
-});        // Rotating quotes
+});
+
+        // Rotating quotes
         let currentQuote = 0;
         const quotes = ['quote1', 'quote2', 'quote3', 'quote4', 'quote5'];
         
@@ -2081,3 +2075,4 @@ document.getElementById('exitPopupForm').addEventListener('submit', async functi
     </script>
 </body>
 </html>
+        
