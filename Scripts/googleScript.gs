@@ -107,7 +107,7 @@ function sendWelcomeEmail(firstName, lastName, email, source) {
     "Best regards,\n" +
     "Martin Tobias\n" +
     "Creator of Maintain-It\n" +
-    "Maintain-It.help@hotmail.com\n\n" +
+    "maintainit.help@gmail.com\n\n" +
     "P.S. Early access users get 30 days free instead of 14. We will send you a special code when we launch!\n\n" +
     "---\n" +
     "Website: https://themaintainit.app\n" +
@@ -192,7 +192,7 @@ function sendWelcomeEmail(firstName, lastName, email, source) {
     '<p style="margin: 0 0 5px 0;"><strong>Best regards,</strong></p>' +
     '<p style="margin: 0 0 5px 0;">Martin Tobias</p>' +
     '<p style="margin: 0 0 5px 0; color: #64748B;">Creator of Maintain-It</p>' +
-    '<p style="margin: 0;"><a href="mailto:Maintain-It.help@hotmail.com" style="color: #3B82F6; text-decoration: none;">Maintain-It.help@hotmail.com</a></p>' +
+    '<p style="margin: 0;"><a href="mailto:maintainit.help@gmail.com" style="color: #3B82F6; text-decoration: none;">maintainit.help@gmail.com</a></p>' +
     '</div>' +
     '<p style="font-size: 14px; color: #64748B; margin-top: 30px; font-style: italic;">' +
     '<strong>P.S.</strong> We will notify you the moment Maintain-It launches. You will be among the first to experience 30-second VIN scanning!' +
@@ -215,7 +215,7 @@ function sendWelcomeEmail(firstName, lastName, email, source) {
     GmailApp.sendEmail(email, subject, plainBody, {
       htmlBody: htmlBody,
       name: senderName,
-      replyTo: 'Maintain-It.help@hotmail.com',
+      replyTo: 'maintainit.help@gmail.com',
       charset: 'UTF-8'
     });
     
@@ -251,7 +251,7 @@ function sendChecklistLink(firstName, lastName, email, source) {
     "Best regards,\n" +
     "Martin Tobias\n" +
     "Creator of Maintain-It\n" +
-    "Maintain-It.help@hotmail.com\n\n" +
+    "maintainit.help@gmail.com\n\n" +
     "---\n" +
     "Support: https://sites.google.com/view/maintainit-app-help/support";
 
@@ -313,7 +313,7 @@ function sendChecklistLink(firstName, lastName, email, source) {
     '<strong>Best regards,</strong><br>' +
     'Martin Tobias<br>' +
     'Creator of Maintain-It<br>' +
-    '<a href="mailto:Maintain-It.help@hotmail.com" style="color: #3B82F6;">Maintain-It.help@hotmail.com</a>' +
+    '<a href="mailto:maintainit.help@gmail.com" style="color: #3B82F6;">maintainit.help@gmail.com</a>' +
     '</p>' +
     '<p style="font-size: 13px; color: #64748B; margin-top: 30px;">' +
     '<strong>P.S.</strong> The checklist is yours to keep forever. But if you want to actually <em>remember</em> to complete these tasks, Maintain-It makes it effortless.' +
@@ -335,7 +335,7 @@ function sendChecklistLink(firstName, lastName, email, source) {
     GmailApp.sendEmail(email, subject, plainBody, {
       htmlBody: htmlBody,
       name: senderName,
-      replyTo: 'Maintain-It.help@hotmail.com',
+      replyTo: 'maintainit.help@gmail.com',
       charset: 'UTF-8'
     });
     
@@ -346,13 +346,3 @@ function sendChecklistLink(firstName, lastName, email, source) {
   }
 }
 
-// TEST FUNCTIONS
-function testWelcomeEmail() {
-  sendWelcomeEmail('John', 'Doe', 'mtobias2000@hotmail.com', 'test');
-  Logger.log('Test welcome email sent!');
-}
-
-function testChecklistEmail() {
-  sendChecklistLink('John', 'Doe', 'mtobias2000@hotmail.com', 'test');
-  Logger.log('Test checklist email sent!');
-}
