@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terms of Service | Maintain-It</title>
+    <title>Terms of Service | Maintain--It</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             line-height: 1.6;
             color: #333;
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             padding: 40px 20px;
             background-color: #f9f9f9;
@@ -20,79 +20,460 @@
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
-        h1 { color: #000; border-bottom: 2px solid #eee; padding-bottom: 10px; margin-top: 0; }
-        h2 { color: #0056b3; margin-top: 30px; font-size: 1.4em; }
-        .last-updated { color: #666; font-style: italic; margin-bottom: 30px; }
-        .legal-notice {
-            background-color: #fff9e6;
-            border: 1px solid #ffeeba;
+        h1 { 
+            color: #000; 
+            border-bottom: 3px solid #0056b3; 
+            padding-bottom: 15px; 
+            margin-top: 0; 
+        }
+        h2 { 
+            color: #0056b3; 
+            margin-top: 40px; 
+            font-size: 1.5em;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 8px;
+        }
+        h3 {
+            color: #333;
+            margin-top: 25px;
+            font-size: 1.2em;
+        }
+        .last-updated { 
+            color: #666; 
+            font-style: italic; 
+            margin-bottom: 30px; 
+        }
+        .critical-notice {
+            background-color: #fff3cd;
+            border-left: 4px solid #ff9800;
+            padding: 20px;
+            margin: 30px 0;
+            font-size: 1em;
+        }
+        .critical-notice strong {
+            color: #ff6b00;
+            font-size: 1.1em;
+        }
+        .warning-box {
+            background-color: #ffe6e6;
+            border: 2px solid #ff4444;
             padding: 15px;
             margin: 20px 0;
-            font-size: 0.9em;
+            border-radius: 5px;
         }
-        ul { padding-left: 20px; }
-        li { margin-bottom: 8px; }
-        .footer { margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee; font-size: 0.9em; color: #666; }
+        .info-box {
+            background-color: #e6f3ff;
+            border-left: 4px solid #0056b3;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        ul { 
+            padding-left: 25px; 
+            margin: 15px 0;
+        }
+        li { 
+            margin-bottom: 10px; 
+        }
+        .no-liability-list {
+            background-color: #fff5f5;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        .no-liability-list li {
+            color: #c62828;
+        }
+        .user-responsibility-list {
+            background-color: #f0f8ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        .user-responsibility-list li {
+            color: #0056b3;
+        }
+        .footer { 
+            margin-top: 50px; 
+            padding-top: 20px; 
+            border-top: 2px solid #eee; 
+            font-size: 0.9em; 
+            color: #666;
+            text-align: center;
+        }
+        a {
+            color: #0056b3;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .summary-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+        .summary-box h3 {
+            color: white;
+            margin-top: 0;
+        }
+        .toc {
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .toc ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .toc li {
+            margin-bottom: 8px;
+        }
+        .toc a {
+            color: #0056b3;
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
     <h1>Terms of Service</h1>
-    <p class="last-updated">Last Updated: January 2026</p>
+    <p class="last-updated">Last Updated: February 10, 2025 | Effective Date: February 10, 2025</p>
 
-    <div class="legal-notice">
-        <strong>PLEASE READ CAREFULLY:</strong> By using the Maintain-It application, you agree to be bound by these terms. If you do not agree, do not use the application.
+    <div class="critical-notice">
+        <strong>⚠️ IMPORTANT LEGAL NOTICE:</strong><br>
+        By using Maintain--It, you acknowledge that this is a <strong>reminder tool only</strong> and that <strong>YOU are solely responsible</strong> for completing all maintenance tasks. We are <strong>NOT liable</strong> for missed tasks, failed notifications, or any damages resulting from your use of the app.
     </div>
 
-    <section>
-        <h2>1. Description of Service</h2>
-        <p>Maintain-It is a mobile application designed to help users track, schedule, and manage maintenance tasks for vehicles, property, and equipment.</p>
-    </section>
-
-    <section>
-        <h2>2. License Grant</h2>
-        <p>Maintain-It grants you a personal, non-exclusive, non-transferable, and revocable license to use the application solely for personal, non-commercial purposes on Apple-branded products that you own or control.</p>
-    </section>
-
-    <section>
-        <h2>3. Subscriptions & Billing</h2>
-        <p>Maintain-It offers auto-renewable "Pro" subscriptions through the Apple App Store.</p>
+    <div class="toc">
+        <h3>Table of Contents</h3>
         <ul>
-            <li><strong>Payment:</strong> Payment will be charged to your Apple ID account at the confirmation of purchase.</li>
-            <li><strong>Auto-Renewal:</strong> Subscription automatically renews unless it is canceled at least 24 hours before the end of the current period.</li>
-            <li><strong>Managing Subscriptions:</strong> You can manage and cancel your subscriptions by going to your App Store account settings after purchase.</li>
-            <li><strong>No Refunds:</strong> All transactions are final. If technical issues occur, refunds are determined solely by Apple.</li>
+            <li><a href="#section1">1. Acceptance of Terms</a></li>
+            <li><a href="#section2">2. Description of Service</a></li>
+            <li><a href="#section3">3. 🚨 Disclaimer of Liability - No Responsibility for Missed Tasks</a></li>
+            <li><a href="#section4">4. Warranty Disclaimer</a></li>
+            <li><a href="#section5">5. Limitation of Liability</a></li>
+            <li><a href="#section6">6. Subscriptions & Billing</a></li>
+            <li><a href="#section7">7. User Responsibilities</a></li>
+            <li><a href="#section8">8. Service Provider Recommendations</a></li>
+            <li><a href="#section9">9. AI-Powered Features</a></li>
+            <li><a href="#section10">10. Privacy Policy</a></li>
+            <li><a href="#section11">11. Contact Information</a></li>
+        </ul>
+    </div>
+
+    <section id="section1">
+        <h2>1. Acceptance of Terms</h2>
+        <p>By downloading, installing, or using Maintain--It ("the App"), you agree to be bound by these Terms of Service ("Terms"). If you do not agree to these Terms, <strong>do not use the App</strong>.</p>
+    </section>
+
+    <section id="section2">
+        <h2>2. Description of Service</h2>
+        <p>Maintain--It is a home and vehicle maintenance tracking application that provides:</p>
+        <ul>
+            <li>Maintenance task tracking and scheduling</li>
+            <li>Reminder notifications</li>
+            <li>Service history recording</li>
+            <li>Warranty document storage (Pro)</li>
+            <li>Mileage and service cost tracking</li>
+            <li>Service provider recommendations (Pro)</li>
+        </ul>
+        
+        <div class="warning-box">
+            <strong>IMPORTANT:</strong> Maintain--It is a <strong>reminder and organizational tool only</strong>. It is NOT a substitute for professional maintenance advice, manufacturer recommendations, or your own diligence.
+        </div>
+    </section>
+
+    <section id="section3">
+        <h2>3. 🚨 Disclaimer of Liability - No Responsibility for Missed Tasks</h2>
+        
+        <h3>3.1 User Responsibility for Maintenance</h3>
+        
+        <div class="warning-box">
+            <p><strong>YOU ACKNOWLEDGE AND AGREE THAT:</strong></p>
+            <p>Maintain--It is a reminder tool, not a guarantee. <strong>YOU are solely responsible</strong> for actually performing all maintenance.</p>
+        </div>
+
+        <div class="no-liability-list">
+            <p><strong>WE ARE NOT RESPONSIBLE FOR:</strong></p>
+            <ul>
+                <li>❌ Missed maintenance appointments or deadlines</li>
+                <li>❌ Forgotten or ignored tasks</li>
+                <li>❌ Overdue vehicle inspections, registrations, or emissions tests</li>
+                <li>❌ Expired warranties due to missed claim deadlines</li>
+                <li>❌ Vehicle breakdowns or failures due to skipped maintenance</li>
+                <li>❌ Property damage due to neglected home maintenance</li>
+                <li>❌ Safety issues arising from deferred maintenance</li>
+                <li>❌ Financial losses from missed warranty claims</li>
+                <li>❌ Any damages resulting from failure to complete tasks</li>
+            </ul>
+        </div>
+
+        <div class="user-responsibility-list">
+            <p><strong>YOU UNDERSTAND THAT:</strong></p>
+            <ul>
+                <li>✓ Notifications are a convenience feature, not a guarantee</li>
+                <li>✓ You must actively check the App and your maintenance schedule</li>
+                <li>✓ You are responsible for setting appropriate due dates</li>
+                <li>✓ You are responsible for completing tasks on time</li>
+                <li>✓ The App does NOT replace your own diligence and attention</li>
+            </ul>
+        </div>
+
+        <h3>3.2 No Guarantee of Notifications</h3>
+        <p><strong>WE DO NOT GUARANTEE THAT NOTIFICATIONS WILL BE DELIVERED.</strong></p>
+        
+        <div class="info-box">
+            <p><strong>Notifications may fail due to:</strong></p>
+            <ul>
+                <li>iOS notification settings being disabled</li>
+                <li>"Do Not Disturb" or "Focus" modes</li>
+                <li>Low battery or Low Power Mode</li>
+                <li>Network connectivity issues</li>
+                <li>iOS software bugs or updates</li>
+                <li>Device storage being full</li>
+                <li>Time zone changes</li>
+                <li>App being force-closed by system</li>
+                <li>Device restarts or software updates</li>
+                <li>User error in setting due dates</li>
+            </ul>
+        </div>
+
+        <p><strong>YOU AGREE:</strong></p>
+        <ul>
+            <li>To regularly check the App manually for upcoming tasks</li>
+            <li>Not to rely solely on notifications</li>
+            <li>To verify notification settings are properly configured</li>
+            <li>To test notifications periodically</li>
+            <li>That <strong>WE ARE NOT LIABLE</strong> for any consequences of missed notifications</li>
+        </ul>
+
+        <h3>3.3 Maintenance Schedule Accuracy</h3>
+        <p>Maintenance schedules and intervals in the App are <strong>GENERAL GUIDANCE ONLY</strong>.</p>
+        
+        <div class="user-responsibility-list">
+            <p><strong>YOU MUST:</strong></p>
+            <ul>
+                <li>Consult your vehicle owner's manual for official maintenance schedules</li>
+                <li>Follow manufacturer recommendations for your specific vehicle</li>
+                <li>Consult with qualified professionals for maintenance advice</li>
+                <li>Consider your specific usage patterns and driving conditions</li>
+                <li>Adjust schedules based on climate and environmental factors</li>
+            </ul>
+        </div>
+
+        <p>The App provides generic maintenance schedules. <strong>Your vehicle may require different intervals.</strong></p>
+    </section>
+
+    <section id="section4">
+        <h2>4. Warranty Disclaimer</h2>
+        <p>THE APPLICATION IS PROVIDED "AS IS" WITHOUT WARRANTIES OF ANY KIND.</p>
+        
+        <div class="warning-box">
+            <p><strong>WE DISCLAIM ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING:</strong></p>
+            <ul>
+                <li>Warranties of merchantability</li>
+                <li>Fitness for a particular purpose</li>
+                <li>Non-infringement</li>
+                <li>Accuracy of information</li>
+                <li>Reliability of notifications</li>
+                <li>Uninterrupted service</li>
+                <li>Error-free operation</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="section5">
+        <h2>5. Limitation of Liability</h2>
+        
+        <div class="warning-box">
+            <p><strong>TO THE MAXIMUM EXTENT PERMITTED BY LAW:</strong></p>
+            <p>WE SHALL NOT BE LIABLE FOR ANY direct, indirect, incidental, special, or consequential damages including:</p>
+            <ul>
+                <li>Loss of profits, revenue, data, or use</li>
+                <li>Vehicle damage due to missed maintenance</li>
+                <li>Property damage due to neglected maintenance</li>
+                <li>Personal injury or death</li>
+                <li>Breach of warranty claims due to missed deadlines</li>
+                <li>Inspection failures or legal penalties</li>
+                <li>Towing costs or emergency repairs</li>
+                <li>Any damages exceeding the amount you paid for the App</li>
+            </ul>
+        </div>
+
+        <p><strong>MAXIMUM LIABILITY:</strong> In no event shall our total liability exceed the amount you actually paid for the App subscription in the 12 months preceding the claim (typically $0 for free users, or subscription cost for Pro users).</p>
+    </section>
+
+    <section id="section6">
+        <h2>6. Subscriptions & Billing (Pro)</h2>
+        
+        <h3>6.1 Free Trial</h3>
+        <ul>
+            <li>New users may receive a free trial period</li>
+            <li>Credit card required (managed by Apple)</li>
+            <li>Trial automatically converts to paid subscription unless cancelled</li>
+            <li>Cancel anytime before trial ends to avoid charges</li>
+            <li>One trial per Apple ID</li>
+        </ul>
+
+        <h3>6.2 Paid Subscription</h3>
+        <ul>
+            <li><strong>Payment:</strong> Billed monthly or annually through Apple App Store</li>
+            <li><strong>Auto-Renewal:</strong> Subscription automatically renews unless cancelled 24 hours before renewal</li>
+            <li><strong>Managing:</strong> Manage or cancel in iOS Settings → [Your Name] → Subscriptions</li>
+            <li><strong>No Refunds:</strong> No refunds for partial periods</li>
+        </ul>
+
+        <h3>6.3 Cancellation</h3>
+        <ul>
+            <li>Cancel anytime through iOS Settings</li>
+            <li>Access continues until end of paid period</li>
+            <li>After cancellation, Pro features become locked</li>
+            <li>Historical data remains viewable (read-only)</li>
+            <li>Can resubscribe anytime to regain full access</li>
         </ul>
     </section>
 
-    <section>
-        <h2>4. User Responsibilities</h2>
-        <p>You are responsible for the accuracy of the data you enter, including maintenance intervals and service logs. Maintain-It is a tool for organization and does not replace professional mechanical or technical advice.</p>
+    <section id="section7">
+        <h2>7. User Responsibilities</h2>
+        
+        <div class="user-responsibility-list">
+            <p><strong>YOU AGREE TO:</strong></p>
+            <ul>
+                <li>Provide accurate information when creating tasks and schedules</li>
+                <li>Regularly check the App for upcoming maintenance</li>
+                <li>Set appropriate and accurate due dates</li>
+                <li>Enable and test notification settings</li>
+                <li>Maintain iCloud backup for data protection</li>
+                <li>Follow manufacturer maintenance recommendations</li>
+                <li>Consult professionals for maintenance advice</li>
+                <li>Verify service provider credentials</li>
+                <li>Use the App in accordance with these Terms</li>
+            </ul>
+        </div>
+
+        <div class="no-liability-list">
+            <p><strong>YOU AGREE NOT TO:</strong></p>
+            <ul>
+                <li>Rely solely on notifications without checking the App</li>
+                <li>Blame the App for your failure to complete maintenance</li>
+                <li>Hold us responsible for notification failures</li>
+                <li>Misuse or abuse the App's features</li>
+                <li>Reverse engineer or decompile the App</li>
+                <li>Share Pro features with non-subscribers</li>
+            </ul>
+        </div>
     </section>
 
-    <section>
-        <h2>5. Disclaimer of Warranties</h2>
-        <p>THE APPLICATION IS PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTIES OF ANY KIND. Maintain-It does not guarantee that your equipment will not fail or that the app will be free of errors.</p>
+    <section id="section8">
+        <h2>8. Service Provider Recommendations (Pro - "Find a Pro")</h2>
+        
+        <div class="warning-box">
+            <p><strong>The "Find a Pro" feature provides contact information only.</strong></p>
+            <p><strong>WE DO NOT:</strong></p>
+            <ul>
+                <li>Endorse or recommend any specific service provider</li>
+                <li>Verify qualifications, licensing, or insurance of providers</li>
+                <li>Guarantee quality of work performed</li>
+                <li>Have any relationship with listed service providers</li>
+                <li>Receive compensation from service providers</li>
+                <li>Perform background checks on service providers</li>
+            </ul>
+        </div>
+
+        <div class="user-responsibility-list">
+            <p><strong>YOU ARE SOLELY RESPONSIBLE FOR:</strong></p>
+            <ul>
+                <li>Verifying credentials and qualifications of any service provider</li>
+                <li>Checking licenses, insurance, and certifications</li>
+                <li>Reading reviews and performing due diligence</li>
+                <li>Negotiating prices and terms of service</li>
+                <li>Ensuring quality of work performed</li>
+                <li>Any disputes with service providers</li>
+            </ul>
+        </div>
+
+        <p><strong>Service providers are found via Google Places API and displayed based on proximity, Google ratings, and relevance only.</strong></p>
     </section>
 
-    <section>
-        <h2>6. Limitation of Liability</h2>
-        <p>To the maximum extent permitted by law, Maintain-It shall not be liable for any damages resulting from missed maintenance tasks, property damage, or loss of data.</p>
+    <section id="section9">
+        <h2>9. AI-Powered Features (Pro)</h2>
+        <p>Warranty Document Extraction uses AI technology.</p>
+        
+        <div class="info-box">
+            <p><strong>YOU ACKNOWLEDGE:</strong></p>
+            <ul>
+                <li>AI extraction may contain errors or inaccuracies</li>
+                <li>You must verify all extracted information</li>
+                <li>We are not liable for incorrect extractions</li>
+                <li>Original documents should be retained and reviewed</li>
+                <li>AI is a convenience tool, not a replacement for reading documents</li>
+            </ul>
+        </div>
+
+        <p><strong>Always verify AI-extracted information against original documents.</strong></p>
     </section>
 
-    <section>
-        <h2>7. Privacy Policy</h2>
+    <section id="section10">
+        <h2>10. Privacy Policy</h2>
         <p>Your use of the App is also governed by our <a href="privacy.html">Privacy Policy</a>, which explains our commitment to keeping your data local to your device.</p>
+        
+        <div class="info-box">
+            <p><strong>Key Privacy Points:</strong></p>
+            <ul>
+                <li>All data stored locally on your device</li>
+                <li>We do not collect or store your personal information</li>
+                <li>Optional iCloud backup to YOUR Apple account</li>
+                <li>No third-party data sharing (except RevenueCat for subscriptions)</li>
+            </ul>
+        </div>
     </section>
 
-    <section>
-        <h2>8. Contact Us</h2>
-        <p>Questions about these Terms? Email us at: <strong>maintainit.help@gmail.com</strong>.</p>
+    <section id="section11">
+        <h2>11. Contact Information</h2>
+        <p>Questions about these Terms? Contact us:</p>
+        <ul>
+            <li><strong>Email:</strong> <a href="mailto:maintainit.help@gmail.com">maintainit.help@gmail.com</a></li>
+            <li><strong>Website:</strong> <a href="https://sites.google.com/view/maintainit-app-help" target="_blank">sites.google.com/view/maintainit-app-help</a></li>
+            <li><strong>Response Time:</strong> Typically within 24 hours</li>
+        </ul>
+        <p><strong>Developer:</strong> MTDev, USA</p>
     </section>
+
+    <div class="summary-box">
+        <h3>📋 Summary of Key Disclaimers</h3>
+        <p><strong>For your convenience, here are the critical liability limitations:</strong></p>
+        
+        <p><strong>🚫 We are NOT responsible for:</strong></p>
+        <ul>
+            <li>Missed maintenance tasks or deadlines</li>
+            <li>Failed or undelivered notifications</li>
+            <li>Vehicle breakdowns due to skipped maintenance</li>
+            <li>Property damage due to neglected maintenance</li>
+            <li>Expired warranties or missed claim deadlines</li>
+            <li>Service provider quality or conduct</li>
+            <li>Any damages resulting from your use of the App</li>
+        </ul>
+
+        <p><strong>✓ You ARE responsible for:</strong></p>
+        <ul>
+            <li>Actually performing all maintenance</li>
+            <li>Checking the App regularly</li>
+            <li>Setting correct due dates</li>
+            <li>Verifying notification settings work</li>
+            <li>Following manufacturer recommendations</li>
+            <li>Consulting professionals for advice</li>
+            <li>Vetting service providers</li>
+        </ul>
+
+        <p style="font-size: 1.1em; margin-top: 20px;"><strong>⚠️ The App is a REMINDER TOOL. You must take action.</strong></p>
+    </div>
 
     <div class="footer">
-        <p>&copy; 2026 Maintain-It.</p>
+        <p><strong>By using Maintain--It, you acknowledge that you have read, understood, and agree to these Terms of Service.</strong></p>
+        <p style="margin-top: 20px;">&copy; 2026 Maintain--It | Version 1.1</p>
     </div>
 </div>
 
