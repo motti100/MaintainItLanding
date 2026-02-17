@@ -2281,9 +2281,12 @@ let currentQuote = 0;
 const quotes = ['quote1', 'quote2', 'quote3', 'quote4', 'quote5'];
 
 function rotateQuotes() {
-    document.getElementById(quotes[currentQuote]).classList.remove('active');
+    const current = document.getElementById(quotes[currentQuote]);
     currentQuote = (currentQuote + 1) % quotes.length;
-    document.getElementById(quotes[currentQuote]).classList.add('active');
+    const next = document.getElementById(quotes[currentQuote]);
+    
+    if (current) current.classList.remove('active');
+    if (next) next.classList.add('active');
 }
 
 setInterval(rotateQuotes, 5000);
