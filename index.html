@@ -2123,7 +2123,7 @@ document.getElementById('ctaForm').addEventListener('submit', async function(e) 
         console.log('📤 Sending to Apps Script...');
         
         const response = await fetch('https://script.google.com/macros/s/AKfycbyQdwuiAjVwcskS9BDGlRQevwLOyg-72iDW9PldmH59a62W7xiN-GjDsxx_am_uTOag/exec', {
-            method: 'POST',
+            method: 'POST',           
             body: formData,
             mode: 'no-cors', // Important for iOS!
             redirect: 'follow'
