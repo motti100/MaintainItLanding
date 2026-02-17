@@ -2085,66 +2085,81 @@
 // HERO FORM
 document.getElementById('ctaForm').addEventListener('submit', async function(e) {
     e.preventDefault();
+    
     const firstName = document.getElementById('firstNameInput').value.trim();
     const lastName = document.getElementById('lastNameInput').value.trim();
     const email = document.getElementById('emailInput').value.trim();
     const successMessage = document.getElementById('successMessage');
     const submitBtn = this.querySelector('.cta-btn');
     
-    // LOG for debugging
-    console.log('📤 Form submit started');
-    console.log('Data:', {firstName, lastName, email});
+    console.log('📤 Hero Form Submit:', {firstName, lastName, email});
     
     submitBtn.disabled = true;
     submitBtn.textContent = 'Sending...';
     
-    // Build form data
-    const formData = new FormData();
-    formData.append('firstName', firstName);
-    formData.append('lastName', lastName);
-    formData.append('email', email);
-    formData.append('source', 'hero-form');
-    formData.append('userAgent', navigator.userAgent || 'Unknown');
-    formData.append('screenResolution', (screen.width + 'x' + screen.height) || 'Unknown');
-    formData.append('timezone', (Intl.DateTimeFormat().resolvedOptions().timeZone) || 'Unknown');
-    formData.append('language', navigator.language || 'Unknown');
-    formData.append('referrer', document.referrer || 'Direct');
+    // Create URL-encoded params (more reliable than FormData with no-cors)
+    const params = new URLSearchParams({
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        source: 'hero-form',
+        userAgent: navigator.userAgent || 'Unknown',
+        screenResolution: screen.width + 'x' + screen.height,
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || 'Unknown',
+        language: navigator.language || 'Unknown',
+        referrer: document.referrer || 'Direct',
+        ipAddress: 'Unknown',
+        timestamp: new Date().toISOString()
+    });
     
-    // Get IP address WITHOUT blocking the form
-    formData.append('ipAddress', 'Unknown'); // Default value
-    
-    // Try to get IP but DON'T WAIT for it - send immediately
-    fetch('https://api.ipify.org?format=json')
-        .then(r => r.json())
-        .then(data => console.log('IP fetched:', data.ip))
-        .catch(e => console.log('IP fetch failed (not critical):', e));
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyQdwuiAjVwcskS9BDGlRQevwLOyg-72iDW9PldmH59a62W7xiN-GjDsxx_am_uTOag/exec';
     
     try {
-        console.log('📤 Sending to Apps Script...');
+        // METHOD 1: Try POST with no-cors
+        console.log('🔄 Attempting POST...');
         
-        const response = await fetch('https://script.google.com/macros/s/AKfycbyQdwuiAjVwcskS9BDGlRQevwLOyg-72iDW9PldmH59a62W7xiN-GjDsxx_am_uTOag/exec', {
-            method: 'POST',           
-            body: formData,
-            mode: 'no-cors', // Important for iOS!
+        const response = await fetch(scriptURL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: params.toString(),
+            mode: 'no-cors',
             redirect: 'follow'
         });
         
-        console.log('✅ Request sent! Status:', response.status);
-        console.log('✅ Form submitted successfully');
+        console.log('✅ POST request sent (no-cors mode)');
         
-        // Show success
+        // Success (can't read response in no-cors but request was sent)
         successMessage.classList.add('show');
-        document.getElementById('firstNameInput').value = '';
-        document.getElementById('lastNameInput').value = '';
-        document.getElementById('emailInput').value = '';
+        this.reset();
         
         setTimeout(() => {
             successMessage.classList.remove('show');
         }, 5000);
         
+        // Fallback: Also try GET method (more reliable across browsers)
+        console.log('🔄 Sending backup GET request...');
+        const getURL = scriptURL + '?' + params.toString();
+        fetch(getURL, {method: 'GET', mode: 'no-cors'}).catch(e => console.log('GET backup failed:', e));
+        
     } catch (error) {
-        console.error('❌ Form error:', error);
-        alert('Error submitting form: ' + error.message);
+        console.error('❌ Form submission error:', error);
+        
+        // FALLBACK: Try GET method as last resort
+        console.log('🔄 Trying GET method fallback...');
+        try {
+            const getURL = scriptURL + '?' + params.toString();
+            await fetch(getURL, {method: 'GET', mode: 'no-cors'});
+            
+            successMessage.classList.add('show');
+            this.reset();
+            setTimeout(() => successMessage.classList.remove('show'), 5000);
+            
+        } catch (getError) {
+            console.error('❌ GET fallback also failed:', getError);
+            alert('Unable to submit form. Please email us directly at maintainit.help@gmail.com');
+        }
         
     } finally {
         submitBtn.disabled = false;
@@ -2155,67 +2170,64 @@ document.getElementById('ctaForm').addEventListener('submit', async function(e) 
 // BOTTOM FORM
 document.getElementById('ctaFormBottom').addEventListener('submit', async function(e) {
     e.preventDefault();
-    const firstName = document.getElementById('firstNameInputBottom').value;
-    const lastName = document.getElementById('lastNameInputBottom').value;
-    const email = document.getElementById('emailInputBottom').value;
-    const successMessage = document.getElementById('successMessage');
+    
+    const firstName = document.getElementById('firstNameInputBottom').value.trim();
+    const lastName = document.getElementById('lastNameInputBottom').value.trim();
+    const email = document.getElementById('emailInputBottom').value.trim();
+    const successMessage = document.getElementById('successMessageBottom');
     const submitBtn = this.querySelector('.cta-btn');
+    
+    console.log('📤 Bottom Form Submit:', {firstName, lastName, email});
     
     submitBtn.disabled = true;
     submitBtn.textContent = 'Sending...';
     
-    // CAPTURE USER DATA
-    const formData = new FormData();
-    formData.append('firstName', firstName);
-    formData.append('lastName', lastName);
-    formData.append('email', email);
-    formData.append('source', 'bottom-form');
-    formData.append('userAgent', navigator.userAgent);
-    formData.append('screenResolution', screen.width + 'x' + screen.height);
-    formData.append('timezone', Intl.DateTimeFormat().resolvedOptions().timeZone);
-    formData.append('language', navigator.language);
-    formData.append('referrer', document.referrer || 'Direct');
+    const params = new URLSearchParams({
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        source: 'bottom-form',
+        userAgent: navigator.userAgent || 'Unknown',
+        screenResolution: screen.width + 'x' + screen.height,
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || 'Unknown',
+        language: navigator.language || 'Unknown',
+        referrer: document.referrer || 'Direct',
+        ipAddress: 'Unknown',
+        timestamp: new Date().toISOString()
+    });
     
-    // Get IP address
-    try {
-        const ipResponse = await fetch('https://api.ipify.org?format=json');
-        const ipData = await ipResponse.json();
-        formData.append('ipAddress', ipData.ip);
-    } catch (error) {
-        formData.append('ipAddress', 'Unknown');
-        console.log('Could not fetch IP:', error);
-    }
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyQdwuiAjVwcskS9BDGlRQevwLOyg-72iDW9PldmH59a62W7xiN-GjDsxx_am_uTOag/exec';
     
     try {
-        const response = await fetch('https://script.google.com/macros/s/AKfycbyQdwuiAjVwcskS9BDGlRQevwLOyg-72iDW9PldmH59a62W7xiN-GjDsxx_am_uTOag/exec', {
+        await fetch(scriptURL, {
             method: 'POST',
-            body: formData,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            body: params.toString(),
+            mode: 'no-cors',
             redirect: 'follow'
         });
         
-        console.log('Response status:', response.status);
-        console.log('✅ Form submitted with tracking data');
+        console.log('✅ POST sent');
         
         successMessage.classList.add('show');
-        document.getElementById('firstNameInputBottom').value = '';
-        document.getElementById('lastNameInputBottom').value = '';
-        document.getElementById('emailInputBottom').value = '';
+        this.reset();
+        setTimeout(() => successMessage.classList.remove('show'), 5000);
         
-        setTimeout(() => {
-            successMessage.classList.remove('show');
-        }, 5000);
+        // Backup GET
+        fetch(scriptURL + '?' + params.toString(), {method: 'GET', mode: 'no-cors'}).catch(e => {});
         
     } catch (error) {
-        console.error('Form error:', error);
+        console.error('❌ Error:', error);
         
-        successMessage.classList.add('show');
-        document.getElementById('firstNameInputBottom').value = '';
-        document.getElementById('lastNameInputBottom').value = '';
-        document.getElementById('emailInputBottom').value = '';
-        
-        setTimeout(() => {
-            successMessage.classList.remove('show');
-        }, 5000);
+        // Fallback to GET
+        try {
+            await fetch(scriptURL + '?' + params.toString(), {method: 'GET', mode: 'no-cors'});
+            successMessage.classList.add('show');
+            this.reset();
+            setTimeout(() => successMessage.classList.remove('show'), 5000);
+        } catch (e) {
+            alert('Unable to submit. Please email maintainit.help@gmail.com');
+        }
     } finally {
         submitBtn.disabled = false;
         submitBtn.textContent = 'Start Pro Trial';
@@ -2225,67 +2237,69 @@ document.getElementById('ctaFormBottom').addEventListener('submit', async functi
 // EXIT POPUP FORM
 document.getElementById('exitPopupForm').addEventListener('submit', async function(e) {
     e.preventDefault();
-    const firstName = document.getElementById('exitFirstNameInput').value;
-    const lastName = document.getElementById('exitLastNameInput').value;
-    const email = document.getElementById('exitEmailInput').value;
-    const exitPopup = document.getElementById('exitPopup');
-    const submitBtn = this.querySelector('.exit-popup-btn-full');
+    
+    const firstName = document.getElementById('exitFirstName').value.trim();
+    const lastName = document.getElementById('exitLastName').value.trim();
+    const email = document.getElementById('exitEmail').value.trim();
+    const submitBtn = this.querySelector('button[type="submit"]');
+    
+    console.log('📤 Exit Popup Submit:', {firstName, lastName, email});
     
     submitBtn.disabled = true;
     submitBtn.textContent = 'Sending...';
     
-    // CAPTURE USER DATA
-    const formData = new FormData();
-    formData.append('firstName', firstName);
-    formData.append('lastName', lastName);
-    formData.append('email', email);
-    formData.append('source', 'exit-popup');
-    formData.append('userAgent', navigator.userAgent);
-    formData.append('screenResolution', screen.width + 'x' + screen.height);
-    formData.append('timezone', Intl.DateTimeFormat().resolvedOptions().timeZone);
-    formData.append('language', navigator.language);
-    formData.append('referrer', document.referrer || 'Direct');
+    const params = new URLSearchParams({
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        source: 'exit-popup',
+        userAgent: navigator.userAgent || 'Unknown',
+        screenResolution: screen.width + 'x' + screen.height,
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || 'Unknown',
+        language: navigator.language || 'Unknown',
+        referrer: document.referrer || 'Direct',
+        ipAddress: 'Unknown',
+        timestamp: new Date().toISOString()
+    });
     
-    // Get IP address
-    try {
-        const ipResponse = await fetch('https://api.ipify.org?format=json');
-        const ipData = await ipResponse.json();
-        formData.append('ipAddress', ipData.ip);
-    } catch (error) {
-        formData.append('ipAddress', 'Unknown');
-        console.log('Could not fetch IP:', error);
-    }
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyQdwuiAjVwcskS9BDGlRQevwLOyg-72iDW9PldmH59a62W7xiN-GjDsxx_am_uTOag/exec';
     
     try {
-        const response = await fetch('https://script.google.com/macros/s/AKfycbyQdwuiAjVwcskS9BDGlRQevwLOyg-72iDW9PldmH59a62W7xiN-GjDsxx_am_uTOag/exec', {
+        await fetch(scriptURL, {
             method: 'POST',
-            body: formData,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            body: params.toString(),
+            mode: 'no-cors',
             redirect: 'follow'
         });
         
-        console.log('Exit form status:', response.status);
-        console.log('✅ Exit form submitted with tracking data');
+        console.log('✅ Checklist request sent');
         
-        alert('Thanks! Check your email for the download link (check spam folder too).');
-        exitPopup.classList.remove('show');
-        document.getElementById('exitFirstNameInput').value = '';
-        document.getElementById('exitLastNameInput').value = '';
-        document.getElementById('exitEmailInput').value = '';
+        // Show success
+        document.getElementById('exitPopup').style.display = 'none';
+        alert('Check your email! Your checklist download link has been sent.');
+        this.reset();
+        
+        // Backup GET
+        fetch(scriptURL + '?' + params.toString(), {method: 'GET', mode: 'no-cors'}).catch(e => {});
         
     } catch (error) {
-        console.error('Exit form error:', error);
+        console.error('❌ Error:', error);
         
-        alert('Thanks! Check your email for the download link (check spam folder too).');
-        exitPopup.classList.remove('show');
-        document.getElementById('exitFirstNameInput').value = '';
-        document.getElementById('exitLastNameInput').value = '';
-        document.getElementById('exitEmailInput').value = '';
+        // Fallback
+        try {
+            await fetch(scriptURL + '?' + params.toString(), {method: 'GET', mode: 'no-cors'});
+            document.getElementById('exitPopup').style.display = 'none';
+            alert('Check your email!');
+            this.reset();
+        } catch (e) {
+            alert('Unable to submit. Please email maintainit.help@gmail.com');
+        }
     } finally {
         submitBtn.disabled = false;
-        submitBtn.textContent = 'Send Me The Checklist';
+        submitBtn.textContent = 'Get My Free Checklist';
     }
 });
-
 // Rotating quotes
 let currentQuote = 0;
 const quotes = ['quote1', 'quote2', 'quote3', 'quote4', 'quote5'];
