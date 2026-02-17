@@ -2085,81 +2085,66 @@
 // HERO FORM
 document.getElementById('ctaForm').addEventListener('submit', async function(e) {
     e.preventDefault();
-    
     const firstName = document.getElementById('firstNameInput').value.trim();
     const lastName = document.getElementById('lastNameInput').value.trim();
     const email = document.getElementById('emailInput').value.trim();
     const successMessage = document.getElementById('successMessage');
     const submitBtn = this.querySelector('.cta-btn');
     
-    console.log('📤 Hero Form Submit:', {firstName, lastName, email});
+    // LOG for debugging
+    console.log('📤 Form submit started');
+    console.log('Data:', {firstName, lastName, email});
     
     submitBtn.disabled = true;
     submitBtn.textContent = 'Sending...';
     
-    // Create URL-encoded params (more reliable than FormData with no-cors)
-    const params = new URLSearchParams({
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        source: 'hero-form',
-        userAgent: navigator.userAgent || 'Unknown',
-        screenResolution: screen.width + 'x' + screen.height,
-        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || 'Unknown',
-        language: navigator.language || 'Unknown',
-        referrer: document.referrer || 'Direct',
-        ipAddress: 'Unknown',
-        timestamp: new Date().toISOString()
-    });
+    // Build form data
+    const formData = new FormData();
+    formData.append('firstName', firstName);
+    formData.append('lastName', lastName);
+    formData.append('email', email);
+    formData.append('source', 'hero-form');
+    formData.append('userAgent', navigator.userAgent || 'Unknown');
+    formData.append('screenResolution', (screen.width + 'x' + screen.height) || 'Unknown');
+    formData.append('timezone', (Intl.DateTimeFormat().resolvedOptions().timeZone) || 'Unknown');
+    formData.append('language', navigator.language || 'Unknown');
+    formData.append('referrer', document.referrer || 'Direct');
     
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbyQdwuiAjVwcskS9BDGlRQevwLOyg-72iDW9PldmH59a62W7xiN-GjDsxx_am_uTOag/exec';
+    // Get IP address WITHOUT blocking the form
+    formData.append('ipAddress', 'Unknown'); // Default value
+    
+    // Try to get IP but DON'T WAIT for it - send immediately
+    fetch('https://api.ipify.org?format=json')
+        .then(r => r.json())
+        .then(data => console.log('IP fetched:', data.ip))
+        .catch(e => console.log('IP fetch failed (not critical):', e));
     
     try {
-        // METHOD 1: Try POST with no-cors
-        console.log('🔄 Attempting POST...');
+        console.log('📤 Sending to Apps Script...');
         
-        const response = await fetch(scriptURL, {
+        const response = await fetch('https://script.google.com/macros/s/AKfycbyQdwuiAjVwcskS9BDGlRQevwLOyg-72iDW9PldmH59a62W7xiN-GjDsxx_am_uTOag/exec', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: params.toString(),
-            mode: 'no-cors',
+            body: formData,
+            mode: 'no-cors', // Important for iOS!
             redirect: 'follow'
         });
         
-        console.log('✅ POST request sent (no-cors mode)');
+        console.log('✅ Request sent! Status:', response.status);
+        console.log('✅ Form submitted successfully');
         
-        // Success (can't read response in no-cors but request was sent)
+        // Show success
         successMessage.classList.add('show');
-        this.reset();
+        document.getElementById('firstNameInput').value = '';
+        document.getElementById('lastNameInput').value = '';
+        document.getElementById('emailInput').value = '';
         
         setTimeout(() => {
             successMessage.classList.remove('show');
         }, 5000);
         
-        // Fallback: Also try GET method (more reliable across browsers)
-        console.log('🔄 Sending backup GET request...');
-        const getURL = scriptURL + '?' + params.toString();
-        fetch(getURL, {method: 'GET', mode: 'no-cors'}).catch(e => console.log('GET backup failed:', e));
-        
     } catch (error) {
-        console.error('❌ Form submission error:', error);
-        
-        // FALLBACK: Try GET method as last resort
-        console.log('🔄 Trying GET method fallback...');
-        try {
-            const getURL = scriptURL + '?' + params.toString();
-            await fetch(getURL, {method: 'GET', mode: 'no-cors'});
-            
-            successMessage.classList.add('show');
-            this.reset();
-            setTimeout(() => successMessage.classList.remove('show'), 5000);
-            
-        } catch (getError) {
-            console.error('❌ GET fallback also failed:', getError);
-            alert('Unable to submit form. Please email us directly at maintainit.help@gmail.com');
-        }
+        console.error('❌ Form error:', error);
+        alert('Error submitting form: ' + error.message);
         
     } finally {
         submitBtn.disabled = false;
