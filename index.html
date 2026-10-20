@@ -298,6 +298,45 @@
             font-size: 1.3rem;
         }
 
+        /* New-feature announcement */
+        .new-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin: 0 auto 20px;
+            padding: 8px 16px;
+            background: var(--white);
+            border: 1px solid rgba(59, 130, 246, 0.35);
+            border-radius: 999px;
+            box-shadow: 0 2px 10px rgba(59, 130, 246, 0.15);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-main);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .new-pill:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(59, 130, 246, 0.25); }
+        .new-pill b {
+            background: var(--primary);
+            color: #fff;
+            font-size: 0.7rem;
+            letter-spacing: 0.5px;
+            padding: 3px 8px;
+            border-radius: 999px;
+        }
+        .feature-new {
+            display: inline-block;
+            margin-left: 8px;
+            vertical-align: middle;
+            background: var(--primary);
+            color: #fff;
+            font-size: 0.65rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            padding: 3px 8px;
+            border-radius: 999px;
+        }
+
         /* ENHANCED FORM STYLING */
         .cta-form {
             display: flex;
@@ -1133,6 +1172,8 @@
 <!-- Hero Section -->
 <section class="hero" id="hero">
     <img src="app-icon.png" alt="Maintain--It App Icon" class="app-icon">
+
+    <a href="#see-it" class="new-pill" id="newPill"><b>NEW</b> Share with family + calendar sync. Watch the demo ›</a>
     
     <h1>The Only App That Tracks Your <span class="highlight">Home, Car &amp; Motorcycle</span> -All in One Place</h1>
     
@@ -1159,6 +1200,14 @@
         <div class="trust-badge">
             <span class="trust-badge-icon">🔧</span>
             <span>Find Pros Near You</span>
+        </div>
+        <div class="trust-badge">
+            <span class="trust-badge-icon">👨‍👩‍👧</span>
+            <span>Share with Family</span>
+        </div>
+        <div class="trust-badge">
+            <span class="trust-badge-icon">🗓️</span>
+            <span>Calendar Sync</span>
         </div>
     </div>
 
@@ -1201,7 +1250,7 @@
 </section>
 
 <!-- Video Carousel Section -->
-<section class="video-carousel">
+<section class="video-carousel" id="see-it">
     <div class="container">
         <div class="video-carousel-header animate-on-scroll">
             <h2>See Maintain--It in Action</h2>
@@ -1642,6 +1691,18 @@
         
         <div class="features-grid">
             <div class="feature-card animate-on-scroll">
+                <div class="feature-icon">👨‍👩‍👧</div>
+                <h3>Share with Family <span class="feature-new">NEW</span></h3>
+                <p>Invite family or a helper to a home or vehicle. Choose Full access, Assigned tasks only, or View only. Assign tasks, let anyone complete them, and see exactly who did what and when.</p>
+            </div>
+
+            <div class="feature-card animate-on-scroll">
+                <div class="feature-icon">🗓️</div>
+                <h3>Calendar Sync <span class="feature-new">NEW</span></h3>
+                <p>See due dates in Apple Calendar, Outlook or Google Calendar with one private link. Tap an event to jump straight to the task in the app. Shared tasks assigned to you show up too.</p>
+            </div>
+
+            <div class="feature-card animate-on-scroll">
                 <div class="feature-icon">📸</div>
                 <h3>AI VIN Scanner</h3>
                 <p>Snap a photo of your VIN and instantly populate your vehicle with make, model, year, and recommended maintenance schedules. Perfect for cars, trucks, and motorcycles.</p>
@@ -1906,6 +1967,26 @@
         </div>
         
         <div class="faq-list">
+            <div class="faq-item animate-on-scroll">
+                <div class="faq-question">
+                    <span>Can I share my home or vehicle with family?</span>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes. Invite people by email and choose what they can do: Full access (see and complete every task), Assigned tasks only (see and complete only the tasks you give them, great for a helper or contractor), or View only. You decide who does each task, anyone with access can complete theirs, and you see who completed what and when. Sharing your own homes and vehicles is part of the PRO plan, and people you invite can join for free.</p>
+                </div>
+            </div>
+
+            <div class="faq-item animate-on-scroll">
+                <div class="faq-question">
+                    <span>Does Maintain--It work with my calendar?</span>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes. Turn on Calendar Sync in Settings and add your private link once to Apple Calendar, Outlook or Google Calendar. Due dates and scheduled services appear as all-day events, and tapping an event opens the task in the app. Your calendar refreshes by itself (Apple Calendar usually within the hour, Outlook and Google within a few hours), and you can turn it off at any time.</p>
+                </div>
+            </div>
+
             <div class="faq-item animate-on-scroll">
                 <div class="faq-question">
                     <span>How does the AI setup work for vehicles and homes?</span>
@@ -2564,6 +2645,14 @@ carouselContainer.addEventListener('mouseenter', () => {
 carouselContainer.addEventListener('mouseleave', () => {
     carouselInterval = setInterval(autoAdvance, 8000);
 });
+
+// "NEW" pill in the hero: scroll to the demo and open the sharing video
+const newPill = document.getElementById('newPill');
+if (newPill) {
+    newPill.addEventListener('click', () => {
+        setTimeout(() => { if (totalSlides > 7) goToSlide(7); }, 450);
+    });
+}
 
 // Touch/swipe support for mobile
 let touchStartX = 0;
