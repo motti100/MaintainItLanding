@@ -1426,7 +1426,7 @@
                                     controls
                                     preload="metadata"
                                 >
-                                    <source src="/Assets/videos/Task_Sharing_1.mp4" type="video/mp4">
+                                    <source src="/Assets/videos/Sharing_1.mp4" type="video/mp4">
                                     Your browser does not support the video tag.
                                 </video>
                             </div>
@@ -2532,6 +2532,22 @@ setTimeout(function() {
 }, 3000);
 
 // VIDEO CAROUSEL
+// Slides whose video file is missing are removed, so visitors never see a black box.
+(async function initVideoCarousel() {
+await Promise.all(Array.from(document.querySelectorAll('.carousel-slide')).map(async (slide) => {
+    const src = slide.querySelector('source') && slide.querySelector('source').getAttribute('src');
+    if (!src) { slide.remove(); return; }
+    try {
+        const r = await fetch(src, { method: 'HEAD' });
+        const type = r.headers.get('content-type') || '';
+        if (!r.ok || /text\/html/.test(type)) slide.remove();
+    } catch (e) { /* offline or blocked: keep the slide */ }
+}));
+if (!document.querySelector('.carousel-slide')) {
+    const sec = document.getElementById('see-it');
+    if (sec) sec.style.display = 'none';
+    return;
+}
 const carouselTrack = document.getElementById('carouselTrack');
 const prevBtn = document.getElementById('prevBtn');
 const nextBtn = document.getElementById('nextBtn');
@@ -2650,7 +2666,8 @@ carouselContainer.addEventListener('mouseleave', () => {
 const newPill = document.getElementById('newPill');
 if (newPill) {
     newPill.addEventListener('click', () => {
-        setTimeout(() => { if (totalSlides > 7) goToSlide(7); }, 450);
+        const idx = Array.from(videos).findIndex((v) => v.id === 'video8');
+        setTimeout(() => { if (idx >= 0) goToSlide(idx); }, 450);
     });
 }
 
@@ -2672,6 +2689,11 @@ function handleSwipe() {
     if (touchEndX > touchStartX + 50) prevSlide();
 }
 
+// show the real slide count and button state from the start
+carouselCounter.textContent = `1 / ${totalSlides}`;
+prevBtn.disabled = true;
+nextBtn.disabled = totalSlides <= 1;
+})();
 </script>
 </body>
 </html>
