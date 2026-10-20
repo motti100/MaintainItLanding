@@ -2537,11 +2537,22 @@ setTimeout(function() {
 await Promise.all(Array.from(document.querySelectorAll('.carousel-slide')).map(async (slide) => {
     const src = slide.querySelector('source') && slide.querySelector('source').getAttribute('src');
     if (!src) { slide.remove(); return; }
+    // Test by actually loading the video metadata; remove only on a real load error.
+    const ok = await new Promise((resolve) => {
+        const probe = document.createElement('video');
+        probe.preload = 'metadata';
+        const done = (v) => { probe.removeAttribute('src'); probe.load(); resolve(v); };
+        probe.addEventListener('loadedmetadata', () => done(true));
+        probe.addEventListener('error', () => done(false));
+        setTimeout(() => resolve(true), 10000); // slow network: keep the slide
+        probe.src = src;
+    });
+    let exists = false;
     try {
-        const r = await fetch(src, { method: 'HEAD' });
-        const type = r.headers.get('content-type') || '';
-        if (!r.ok || /text\/html/.test(type)) slide.remove();
-    } catch (e) { /* offline or blocked: keep the slide */ }
+        const r = await fetch(src, { method: 'GET', headers: { Range: 'bytes=0-0' } });
+        exists = r.ok && !/text\/html/.test(r.headers.get('content-type') || '');
+    } catch (e) { exists = true; }
+    if (!ok && !exists) slide.remove();
 }));
 if (!document.querySelector('.carousel-slide')) {
     const sec = document.getElementById('see-it');
